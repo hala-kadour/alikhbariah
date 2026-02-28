@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "38183510779",
+    "project_id": "alikhbariah-2026",
+    "storage_bucket": "alikhbariah-2026.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38183510779:android:cc5ead806b81f4aadac65e",
+        "android_client_info": {
+          "package_name": "com.example.alikhbariah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSqtRfP01-owO1cNsnM9sfXDFsmqsaw3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
