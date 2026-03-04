@@ -9,3 +9,12 @@ create table public.app_users (
 )
 
 alter table public.app_users enable row level security;
+
+create policy "public app_users are viewable by every one"
+on public.app_users for select
+using(true);
+
+create policy "user can update ther app_user"
+on public.app_users for update
+using(auth.uid() = id)
+

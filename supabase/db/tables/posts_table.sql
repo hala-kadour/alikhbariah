@@ -14,3 +14,26 @@ create table if not exists posts (
   published_at timestamp with time zone,
   created_at timestamp with time zone default now()
 );
+
+
+alter table public.posts enable row level security;
+
+create policy "Public can read posts"
+on public.posts
+for select
+using (true);
+
+create policy "Admin can insert posts"
+on public.posts
+for insert
+with check (public.is_admin());
+
+create policy "Admin can update posts"
+on public.posts
+for update
+using (public.is_admin());
+
+create policy "Admin can delete posts"
+on public.posts
+for delete
+using (public.is_admin());
