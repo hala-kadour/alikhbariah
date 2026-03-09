@@ -4,8 +4,8 @@ import 'package:lottie/lottie.dart';
 import '../../../config/constant/assets_path.dart';
 import '../../../config/scales/gap.dart';
 
-class FailureStatusAnimation extends StatelessWidget {
-  const FailureStatusAnimation({
+class ErrorStatusAnimation extends StatelessWidget {
+  const ErrorStatusAnimation({
     super.key,
     required this.errorMessage,
     this.onTap,
@@ -21,7 +21,7 @@ class FailureStatusAnimation extends StatelessWidget {
         SizedBox(
           width: 300,
           height: 300,
-          child: Lottie.asset(AnimationsPath.noData),
+          child: Lottie.asset(AnimationsPath.error),
         ),
         Gap.h8,
         Text(

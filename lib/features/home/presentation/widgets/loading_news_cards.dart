@@ -14,6 +14,7 @@ class _LoadingNewsCardsState extends State<LoadingNewsCards> {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
+      enabled: true,
       child: ListView.builder(
         itemCount: 3,
         shrinkWrap: true,

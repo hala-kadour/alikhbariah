@@ -1,11 +1,19 @@
-import 'package:alikhbariah/features/home/domain/models/post/post_model.dart';
-import 'package:alikhbariah/features/home/domain/models/tag/tag_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../core/services/supabase_service.dart';
-import '../repository/home_repository.dart';
+import '../models/post/post_model.dart';
+import '../models/tag/tag_model.dart';
 
-class HomeSupabaseDatasource extends HomeRepository {
-  final _client = SupabaseService.client;
+abstract class HomeSupabaseDataSource {
+  Stream<List<PostModel>> getFeaturedPosts();
+  Stream<List<PostModel>> getBreakingPosts();
+  Future<List<PostModel>> getLatestPosts();
+  Future<List<TagModel>> getTagsByPostId(String? id);
+  Future<List<PostModel>> getRelatedPostsByPostId(String? id);
+}
+
+class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
+  final SupabaseClient _client;
+  HomeSupabaseDataSourceImpl(this._client);
 
   final String _postTable = 'posts';
   final String _postTagsTabel = 'post_tags';
@@ -14,7 +22,6 @@ class HomeSupabaseDatasource extends HomeRepository {
   // ==============================
   // Breaking News
   // ==============================
-
   @override
   Stream<List<PostModel>> getBreakingPosts() {
     return _client
@@ -30,7 +37,6 @@ class HomeSupabaseDatasource extends HomeRepository {
   // ==============================
   // Featured News
   // ==============================
-
   @override
   Stream<List<PostModel>> getFeaturedPosts() {
     return _client
@@ -42,10 +48,10 @@ class HomeSupabaseDatasource extends HomeRepository {
           (data) => data.map<PostModel>((e) => PostModel.fromJson(e)).toList(),
         );
   }
+
   // ==============================
   // Latest Posts
   // ==============================
-
   @override
   Future<List<PostModel>> getLatestPosts() async {
     final response = await _client

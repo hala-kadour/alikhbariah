@@ -1,27 +1,36 @@
-import 'package:alikhbariah/features/bookmark/data/repository/bookmark_repository.dart';
 import '../../../../core/services/object_box_service.dart';
 import '../../../../objectbox.g.dart';
-import '../../domain/models/locale_post.dart';
+import '../../domain/entity/locale_post.dart';
 
-class BookmarkLocalDataSource implements BookmarkRepository {
+abstract class BookmarkLocaleDataSource {
+  Future<List<LocalCollection>> getAllCollections();
+  Future<int> saveCollection(LocalCollection collection);
+  Future<bool> deleteCollection(int id);
+
+  Future<void> addPostToCollection(LocalPost post, int collectionId);
+  Future<void> removePostFromCollection(int postId, int collectionId);
+  Future<List<LocalPost>> getPostsByCollection(int collectionId);
+  Future<bool> isPostSaved(String remoteId);
+  Future<LocalPost?> getPostById(String remoteId);
+}
+
+class BookmarkLocaleDataSourceImpl implements BookmarkLocaleDataSource {
   final ObjectBoxService _service;
 
-  BookmarkLocalDataSource(this._service);
+  BookmarkLocaleDataSourceImpl(this._service);
 
-  // جلب كل المجموعات مع تحديث تلقائي للبيانات
   @override
-  List<LocalCollection> getAllCollections() {
+  Future<List<LocalCollection>> getAllCollections() async {
     return _service.collectionBox.getAll();
   }
 
-  // إضافة أو تعديل اسم كولكشن (ObjectBox يستخدم نفس التابع للتعديل إذا مررتِ الـ ID)
   @override
-  int saveCollection(LocalCollection collection) {
+  Future<int> saveCollection(LocalCollection collection) async {
     return _service.collectionBox.put(collection);
   }
 
   @override
-  bool deleteCollection(int id) {
+  Future<bool> deleteCollection(int id) async {
     return _service.collectionBox.remove(id);
   }
 
@@ -29,7 +38,6 @@ class BookmarkLocalDataSource implements BookmarkRepository {
   Future<void> addPostToCollection(LocalPost post, int collectionId) async {
     final collection = _service.collectionBox.get(collectionId);
     if (collection != null) {
-      // التحقق إذا كان البوست موجود مسبقاً في قاعدة البيانات لتجنب التكرار
       final query = _service.postBox
           .query(LocalPost_.remoteId.equals(post.remoteId))
           .build();
@@ -39,18 +47,16 @@ class BookmarkLocalDataSource implements BookmarkRepository {
       final postToSave = existingPost ?? post;
 
       collection.posts.add(postToSave);
-      _service.collectionBox.put(collection); // يحفظ العلاقة والبوست معاً
+      _service.collectionBox.put(collection);
     }
   }
 
   @override
-  void removePostFromCollection(int postId, int collectionId) {
+  Future<void> removePostFromCollection(int postId, int collectionId) async {
     final collection = _service.collectionBox.get(collectionId);
     if (collection != null) {
       collection.posts.removeWhere((p) => p.id == postId);
       _service.collectionBox.put(collection);
-
-      // اختياري: إذا أردتِ حذف البوست نهائياً من الجهاز إذا لم يعد ينتمي لأي كولكشن
       _cleanupOrphanedPost(postId);
     }
   }
@@ -63,13 +69,13 @@ class BookmarkLocalDataSource implements BookmarkRepository {
   }
 
   @override
-  List<LocalPost> getPostsByCollection(int collectionId) {
+  Future<List<LocalPost>> getPostsByCollection(int collectionId) async {
     final collection = _service.collectionBox.get(collectionId);
     return collection?.posts.toList() ?? [];
   }
 
   @override
-  bool isPostSaved(String remoteId) {
+  Future<bool> isPostSaved(String remoteId) async {
     final query = _service.postBox
         .query(LocalPost_.remoteId.equals(remoteId))
         .build();
@@ -79,7 +85,7 @@ class BookmarkLocalDataSource implements BookmarkRepository {
   }
 
   @override
-  LocalPost? getPostById(String remoteId) {
+  Future<LocalPost?> getPostById(String remoteId) async {
     final query = _service.postBox
         .query(LocalPost_.remoteId.equals(remoteId))
         .build();

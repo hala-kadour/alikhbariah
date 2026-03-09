@@ -324,6 +324,10 @@ class AppIcons {
   static const IconData folderLight = IconData(0xf032, fontFamily: _fontFamily);
   static const IconData filterLight = IconData(0xf034, fontFamily: _fontFamily);
   static const IconData editLight = IconData(0xf036, fontFamily: _fontFamily);
+  static const IconData editSquareLight = IconData(
+    0xf035,
+    fontFamily: _fontFamily,
+  );
   static const IconData downloadLight = IconData(
     0xf037,
     fontFamily: _fontFamily,
@@ -349,6 +353,10 @@ class AppIcons {
   );
   static const IconData timeCircleLight = IconData(
     0xf00b,
+    fontFamily: _fontFamily,
+  );
+  static const IconData moreCircleLight = IconData(
+    0xf024,
     fontFamily: _fontFamily,
   );
   static const IconData bagLight = IconData(0xf04b, fontFamily: _fontFamily);

@@ -1,20 +1,27 @@
-import 'package:alikhbariah/features/explore/data/repository/explore_repositry.dart';
-import 'package:alikhbariah/features/explore/domain/models/category/category_model.dart';
-import 'package:alikhbariah/features/home/domain/models/post/post_model.dart';
-import 'package:alikhbariah/features/home/domain/models/tag/tag_model.dart';
+import 'package:alikhbariah/features/explore/data/models/category/category_model.dart';
+import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
+import 'package:alikhbariah/features/home/data/models/tag/tag_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../core/services/supabase_service.dart';
+abstract class ExploreSupabaseDataSource {
+  Future<List<CategoryModel>> getActiveCategories();
+  Future<List<PostModel>> getPostsByCategoryId(String? id);
+  Future<List<TagModel>> getPopularTags();
+  Future<List<PostModel>> getPostsByTagId(String id);
+  Future<List<PostModel>> getSearchedPosts(String? searchQuery);
+}
 
-class ExploreSupabaseDatasource extends ExploreRepositry {
-  final _client = SupabaseService.client;
-
+class ExploreSupabaseDataSourceImpl implements ExploreSupabaseDataSource {
+  final SupabaseClient _client;
   final String _postTable = 'posts';
   final String _tagTable = 'tags';
   final String _categoryTable = 'categories';
   final String _postTagsTabel = 'post_tags';
 
+  ExploreSupabaseDataSourceImpl(this._client);
+
   @override
-  Future<List<CategoryModel>> getActiveCategory() async {
+  Future<List<CategoryModel>> getActiveCategories() async {
     final response = await _client
         .from(_categoryTable)
         .select()

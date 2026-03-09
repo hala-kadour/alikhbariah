@@ -33,6 +33,9 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
             TextField(
               controller: _controller,
               decoration: InputDecoration(
+                filled: true,
+                fillColor: Theme.of(context).colorScheme.surfaceBright,
+                hoverColor: Theme.of(context).colorScheme.surfaceBright,
                 hintText: "Title".i18n,
                 prefixIcon: const Icon(AppIcons.bookmarkLight),
               ),

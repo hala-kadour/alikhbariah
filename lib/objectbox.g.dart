@@ -14,7 +14,7 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'features/bookmark/domain/models/locale_post.dart';
+import 'features/bookmark/domain/entity/locale_post.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -105,7 +105,13 @@ final _entities = <obx_int.ModelEntity>[
       ),
     ],
     relations: <obx_int.ModelRelation>[],
-    backlinks: <obx_int.ModelBacklink>[],
+    backlinks: <obx_int.ModelBacklink>[
+      obx_int.ModelBacklink(
+        name: 'collections',
+        srcEntity: 'LocalCollection',
+        srcField: 'posts',
+      ),
+    ],
   ),
 ];
 
@@ -220,7 +226,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
     LocalPost: obx_int.EntityDefinition<LocalPost>(
       model: _entities[1],
       toOneRelations: (LocalPost object) => [],
-      toManyRelations: (LocalPost object) => {},
+      toManyRelations: (LocalPost object) => {
+        obx_int.RelInfo<LocalCollection>.toManyBacklink(3, object.id):
+            object.collections,
+      },
       getId: (LocalPost object) => object.id,
       setId: (LocalPost object, int id) {
         object.id = id;
@@ -293,7 +302,11 @@ obx_int.ModelDefinition getObjectBoxModel() {
           localImagePath: localImagePathParam,
           savedAt: savedAtParam,
         );
-
+        obx_int.InternalToManyAccess.setRelInfo<LocalPost>(
+          object.collections,
+          store,
+          obx_int.RelInfo<LocalCollection>.toManyBacklink(3, object.id),
+        );
         return object;
       },
     ),

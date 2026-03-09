@@ -16,7 +16,7 @@ class CustomCategoryNameContainer extends StatelessWidget {
       child: Text(
         categoryName,
         style: Theme.of(context).textTheme.labelSmall!.copyWith(
-          color: AppColors.secondary800,
+          color: AppColors.white,
           fontWeight: FontWeight.w600,
         ),
       ),

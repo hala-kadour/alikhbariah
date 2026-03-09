@@ -1,4 +1,4 @@
-import 'package:alikhbariah/features/home/domain/models/post/post_model.dart';
+import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:alikhbariah/translation/translation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

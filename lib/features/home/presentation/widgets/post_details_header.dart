@@ -1,6 +1,6 @@
 import 'package:alikhbariah/core/helper/time_formatter.dart';
 import 'package:alikhbariah/core/widgets/containers/custom_category_name_container.dart';
-import 'package:alikhbariah/features/home/domain/models/post/post_model.dart';
+import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/scales/gap.dart';

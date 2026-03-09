@@ -1,16 +1,17 @@
 import 'dart:io';
 
-import 'package:alikhbariah/features/bookmark/data/datasource/bookmark_locale_datasource.dart';
-import 'package:alikhbariah/features/home/domain/models/post/post_model.dart';
+import 'package:alikhbariah/features/bookmark/data/datasource/bookmark_locale_data_source.dart';
+import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
+import 'package:alikhbariah/injection_container.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/helper/image_downloader.dart';
 import '../../../../core/services/object_box_service.dart';
-import '../../domain/models/locale_post.dart';
+import '../../domain/entity/locale_post.dart';
 
-final objectBoxProvider = Provider<ObjectBoxService>((ref) {
-  throw UnimplementedError(); // سيتم عمل override له في الـ ProviderScope
-});
+final objectBoxProvider = Provider<ObjectBoxService>(
+  (ref) => sl<ObjectBoxService>(),
+);
 
 final bookmarkRepositoryProvider = Provider((ref) {
   final service = ref.watch(objectBoxProvider);

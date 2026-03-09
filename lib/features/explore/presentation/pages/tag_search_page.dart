@@ -1,7 +1,8 @@
 import 'package:alikhbariah/config/scales/gap.dart';
 import 'package:alikhbariah/core/widgets/containers/custom_tag_container.dart';
+import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
 import 'package:alikhbariah/features/explore/presentation/providers/explore_providers.dart';
-import 'package:alikhbariah/features/home/domain/models/tag/tag_model.dart';
+import 'package:alikhbariah/features/home/data/models/tag/tag_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,7 +17,7 @@ class TagSearchPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var posts = ref.watch(tagPostsProvider(tag.id));
     return Scaffold(
-      appBar: AppBar(),
+      appBar: MainBackAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

@@ -1,7 +1,7 @@
 import 'package:alikhbariah/config/router/app_route_config.dart';
 import 'package:alikhbariah/core/widgets/containers/custom_category_name_container.dart';
 import 'package:alikhbariah/features/bookmark/presentation/widgets/bookmark_icon_button.dart';
-import 'package:alikhbariah/features/home/domain/models/post/post_model.dart';
+import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

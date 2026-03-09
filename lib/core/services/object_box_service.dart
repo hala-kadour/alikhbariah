@@ -1,4 +1,4 @@
-import 'package:alikhbariah/features/bookmark/domain/models/locale_post.dart';
+import 'package:alikhbariah/features/bookmark/domain/entity/locale_post.dart';
 import 'package:alikhbariah/objectbox.g.dart';
 import 'package:alikhbariah/translation/translation.dart';
 

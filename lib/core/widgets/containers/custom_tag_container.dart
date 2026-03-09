@@ -1,5 +1,5 @@
 import 'package:alikhbariah/config/router/app_route_config.dart';
-import 'package:alikhbariah/features/home/domain/models/tag/tag_model.dart';
+import 'package:alikhbariah/features/home/data/models/tag/tag_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,7 +20,7 @@ class CustomTagContainer extends StatelessWidget {
         child: Text(
           "#${tag.name}",
           style: Theme.of(context).textTheme.labelSmall!.copyWith(
-            color: Theme.of(context).colorScheme.secondaryFixed,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ),

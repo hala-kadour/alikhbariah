@@ -2,13 +2,15 @@ import 'package:alikhbariah/features/bookmark/presentation/pages/collection_post
 import 'package:alikhbariah/features/bookmark/presentation/pages/saved_post_details_page.dart';
 import 'package:alikhbariah/features/explore/presentation/pages/actaul_search_page.dart';
 import 'package:alikhbariah/features/explore/presentation/pages/search_page.dart';
-import 'package:alikhbariah/features/home/domain/models/post/post_model.dart';
-import 'package:alikhbariah/features/home/domain/models/tag/tag_model.dart';
+import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
+import 'package:alikhbariah/features/home/data/models/tag/tag_model.dart';
 import 'package:alikhbariah/features/intro/pages/splash_page.dart';
 import 'package:alikhbariah/features/intro/provider/intro_provider.dart';
+import 'package:alikhbariah/features/notifications/presentation/pages/notification_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/bookmark/domain/models/locale_post.dart';
+import '../../core/services/navigation_service.dart';
+import '../../features/bookmark/domain/entity/locale_post.dart';
 import '../../features/bookmark/presentation/pages/bookmark_page.dart';
 import '../../features/explore/presentation/pages/explore_page.dart';
 import '../../features/explore/presentation/pages/tag_search_page.dart';
@@ -23,6 +25,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   final firstLaunch = ref.watch(isFirstProvider);
   return GoRouter(
     initialLocation: '/',
+    navigatorKey: rootNavigatorKey,
     redirect: (context, state) {
       final isFirst = firstLaunch.when(
         data: (value) => value,
@@ -63,6 +66,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/post-details',
         builder: (context, state) =>
             PostDetailsPage(post: state.extra as PostModel),
+      ),
+      GoRoute(
+        name: AppRouteConfig.notifications,
+        path: '/notifications',
+        builder: (context, state) => NotificationPage(),
       ),
       // MOBILE ROOT PAGE
       StatefulShellRoute.indexedStack(

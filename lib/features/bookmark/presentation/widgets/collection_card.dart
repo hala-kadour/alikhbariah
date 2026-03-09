@@ -3,7 +3,7 @@ import 'package:alikhbariah/config/scales/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../domain/models/locale_post.dart';
+import '../../domain/entity/locale_post.dart';
 
 class CollectionCard extends StatelessWidget {
   final LocalCollection collection;
@@ -19,9 +19,9 @@ class CollectionCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.primaries[collection.id % Colors.primaries.length]
-              .withOpacity(0.1),
+              .withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.grey.withOpacity(0.1)),
+          border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),

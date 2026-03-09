@@ -18,5 +18,6 @@ class AppRouteConfig {
   static const savedPostDetails = 'saved-post-details';
   // Settings
   static const settings = 'settings';
-  // ========================================================
+  // Notifications
+  static const notifications = 'notifications';
 }

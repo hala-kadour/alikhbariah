@@ -1,3 +1,5 @@
+import 'package:alikhbariah/core/widgets/animation/empty_status_animation.dart';
+import 'package:alikhbariah/core/widgets/animation/error_status_animation.dart';
 import 'package:alikhbariah/features/home/presentation/providers/home_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,9 +21,16 @@ class LatestPostsViewCards extends StatelessWidget {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: data.length,
-            itemBuilder: (context, index) => NewsCard(post: data[index]),
+            itemBuilder: (context, index) {
+              if (data.isEmpty) {
+                return EmptyStatusAnimation();
+              } else {
+                return NewsCard(post: data[index]);
+              }
+            },
           ),
-          error: (error, _) => Text("Error: $error"),
+          error: (error, _) =>
+              ErrorStatusAnimation(errorMessage: "Error: $error"),
           loading: () => LoadingNewsCards(),
         );
       },

@@ -1,4 +1,4 @@
-import 'package:alikhbariah/features/home/domain/models/tag/tag_model.dart';
+import 'package:alikhbariah/features/home/data/models/tag/tag_model.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 

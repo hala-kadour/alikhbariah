@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:alikhbariah/config/scales/gap.dart';
 import 'package:alikhbariah/config/theme/app_text_styles.dart';
 import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
-import 'package:alikhbariah/features/bookmark/domain/models/locale_post.dart';
+import 'package:alikhbariah/features/bookmark/domain/entity/locale_post.dart';
 import 'package:alikhbariah/translation/translation.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,12 @@ class SavedPostDetailsPage extends StatelessWidget {
                     : Image.network(post.imageUrl ?? '', fit: BoxFit.cover),
               ),
               Gap.h16,
-              Text(post.summary, style: AppTextStyles.titleLarge()),
+              Text(
+                post.summary,
+                style: AppTextStyles.titleLarge(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
               Gap.h8,
               Text(post.content, style: AppTextStyles.bodyMedium()),
               Gap.h16,

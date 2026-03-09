@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/scales/gap.dart';
 import '../../../../core/helper/device_utility.dart';
-import '../../domain/models/locale_post.dart';
+import '../../domain/entity/locale_post.dart';
 
 class SavedPostTile extends StatelessWidget {
   final LocalPost post;

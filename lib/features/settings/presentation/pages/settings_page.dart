@@ -127,7 +127,7 @@ class SettingsPage extends ConsumerWidget {
                 Text(title, style: Theme.of(context).textTheme.titleSmall),
               ],
             ),
-            if (trailing != null) trailing,
+            ?trailing,
           ],
         ),
       ),

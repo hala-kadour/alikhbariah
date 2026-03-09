@@ -1,4 +1,6 @@
-import 'dart:async'; // استيراد التايمر
+import 'dart:async';
+import 'package:alikhbariah/core/widgets/animation/empty_status_animation.dart';
+import 'package:alikhbariah/core/widgets/animation/error_status_animation.dart';
 import 'package:alikhbariah/features/home/presentation/providers/home_providers.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/breaking_news_card.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +38,7 @@ class _BreakingNewsPageViewState extends State<BreakingNewsPageView> {
 
   @override
   void dispose() {
-    _timer?.cancel(); // ضروري جداً إيقاف التايمر عند إغلاق الصفحة
+    _timer?.cancel();
     _pageController.dispose();
     super.dispose();
   }
@@ -48,20 +50,17 @@ class _BreakingNewsPageViewState extends State<BreakingNewsPageView> {
         var posts = ref.watch(breakingPostsProvider);
         return posts.when(
           data: (data) {
-            // تحديث منطق الدوران ليعود للبداية إذا انتهت الأخبار
-            if (data.isEmpty) return const SizedBox();
+            if (data.isEmpty) return const EmptyStatusAnimation();
 
             return SizedBox(
               width: double.infinity,
               height: DeviceUtility.getScreenHeight(context) * 0.35,
               child: PageView.builder(
                 controller: _pageController,
-                // لجعل التقليب مستمر للأبد (اختياري)
                 onPageChanged: (index) {
                   _currentPage = index;
                 },
                 itemBuilder: (context, index) {
-                  // استخدام الـ index مع modulo لضمان استمرارية التقليب
                   final postIndex = index % data.length;
                   return BreakingNewsCard(
                     post: data[postIndex],
@@ -72,7 +71,8 @@ class _BreakingNewsPageViewState extends State<BreakingNewsPageView> {
               ),
             );
           },
-          error: (error, stackTrace) => Text("Error: $error"),
+          error: (error, stackTrace) =>
+              ErrorStatusAnimation(errorMessage: "Error: $error"),
           loading: () => const LoadingBreakingNewsCards(),
         );
       },

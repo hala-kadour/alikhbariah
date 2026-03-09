@@ -1,3 +1,5 @@
+import 'package:alikhbariah/translation/translation.dart';
+
 abstract class Failure {
   final String message;
   const Failure(this.message);
@@ -8,9 +10,9 @@ class ServerFailure extends Failure {
 }
 
 class NetworkFailure extends Failure {
-  const NetworkFailure() : super('تحقق من اتصال الإنترنت');
+  NetworkFailure() : super('Checkout your internet connection'.i18n);
 }
 
 class UnknownFailure extends Failure {
-  const UnknownFailure() : super('حدث خطأ غير متوقع');
+  UnknownFailure() : super('Something went wrong'.i18n);
 }

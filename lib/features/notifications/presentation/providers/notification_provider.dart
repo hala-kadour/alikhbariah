@@ -1,48 +1,18 @@
-import 'dart:async';
-import 'dart:ui';
-
-import 'package:alikhbariah/features/notifications/application/notification_service.dart';
+import 'package:alikhbariah/features/notifications/data/models/app_notification_model.dart';
+import 'package:alikhbariah/features/notifications/domain/usecases/get_notification_use_case.dart';
+import 'package:alikhbariah/injection_container.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final notificationServiceProvider = Provider<NotificationService>(
-  (ref) => NotificationService(),
-);
+final getNotificationsUC = Provider((ref) => sl<GetNotificationUseCase>());
 
-// final edgeFunctionProvider = FutureProvider.family<bool, Map<String, dynamic>>((
-//   ref,
-//   params,
-// ) async {
-//   await ref
-//       .read(notificationServiceProvider)
-//       .sendNotification(title: params['title'], body: params['body']);
-//   return true;
-// });
+final allNotificationProvider = FutureProvider<List<AppNotificationModel>>((
+  ref,
+) async {
+  final useCase = ref.watch(getNotificationsUC);
+  final result = await useCase.call();
 
-final notificationProvider = AsyncNotifierProvider<NotificationNotifier, bool?>(
-  NotificationNotifier.new,
-);
-
-class NotificationNotifier extends AsyncNotifier<bool?> {
-  late final NotificationService _notificationService;
-  @override
-  FutureOr<bool?> build() {
-    _notificationService = ref.read(notificationServiceProvider);
-    return null;
-  }
-
-  Future<void> sentNotification({
-    required String title,
-    required String body,
-    required VoidCallback onSuccess,
-    required Function(String) onError,
-  }) async {
-    try {
-      state = AsyncLoading();
-      await _notificationService.sendNotification(title: title, body: body);
-      onSuccess();
-      state = const AsyncValue.data(true);
-    } catch (e) {
-      onError(e.toString());
-    }
-  }
-}
+  return result.fold(
+    (failure) => throw failure.message,
+    (categoris) => categoris,
+  );
+});

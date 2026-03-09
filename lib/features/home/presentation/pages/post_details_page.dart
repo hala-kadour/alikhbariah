@@ -7,7 +7,7 @@ import 'package:alikhbariah/core/helper/helper.dart';
 import 'package:alikhbariah/core/widgets/containers/custom_category_name_container.dart';
 import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
 import 'package:alikhbariah/features/bookmark/presentation/widgets/bookmark_icon_button.dart';
-import 'package:alikhbariah/features/home/domain/models/post/post_model.dart';
+import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/loading_news_cards.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/related_post_card.dart';
 import 'package:alikhbariah/translation/translation.dart';

@@ -25,57 +25,130 @@ Deno.serve(async (req) => {
       return new Response("ok", { headers: corsHeaders });
     }
 
-    const { title, body } = await req.json();
-
-    if (!title || !body) {
-      return new Response("Missing title or body", { status: 400 });
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) {
+      return new Response("Unauthorized", { status: 401 });
     }
 
-    const authHeader = req.headers.get("Authorization");
-
-    const supabase = createClient(
+    // ✅ Client للتحقق من الأدمن
+    const userClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_ANON_KEY") ?? "",
-      { global: { headers: { Authorization: authHeader! } } }
+      { global: { headers: { Authorization: authHeader } } }
     );
 
-    // 📱 جلب كل التوكنات
-    const { data, error } = await supabase
+    const {
+      data: { user },
+    } = await userClient.auth.getUser();
+
+    if (!user) {
+      return new Response("Unauthorized", { status: 401 });
+    }
+
+    const { data: profile } = await userClient
+      .from("app_users")
+      .select("is_admin")
+      .eq("id", user.id)
+      .single();
+
+    if (!profile?.is_admin) {
+      return new Response("Forbidden", { status: 403 });
+    }
+
+    // 🔑 Service Role Client
+    const adminClient = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    );
+
+    const payload = await req.json();
+
+    let title: string;
+    let body: string;
+    let imageUrl: string | null = null;
+    let postId: string | null = null;
+
+    // 📰 إشعار خبر
+    if (payload.postId) {
+      postId = payload.postId;
+
+      const { data: post, error } = await adminClient
+        .from("posts")
+        .select("title, image_url, is_breaking, is_featured")
+        .eq("id", postId)
+        .single();
+
+      if (error || !post) {
+        throw error || new Error("Post not found");
+      }
+
+      title = post.is_breaking
+        ? "🚨 خبر عاجل"
+        : post.is_featured
+        ? "⭐ خبر مميز"
+        : "📰 خبر جديد";
+
+      body = post.title;
+      imageUrl = post.image_url;
+    }
+
+    // 📢 إشعار مخصص
+    else if (payload.title && payload.body) {
+      title = payload.title;
+      body = payload.body;
+      imageUrl = payload.imageUrl ?? null;
+    }
+
+    else {
+      return new Response("Invalid payload", { status: 400 });
+    }
+
+    // 📱 جلب التوكنات
+    const { data: devices } = await adminClient
       .from("devices")
       .select("fcm_token");
 
-    if (error) {
-      throw error;
-    }
-
-    const tokens = data.map((d) => d.fcm_token);
+    const tokens = devices?.map((d) => d.fcm_token) ?? [];
 
     if (!tokens.length) {
       return new Response("No devices found");
     }
 
-   const message = {
-         tokens,
-         notification: {
-         title,
-         body,
-         },
-         android: {
-           priority: "high",
-           notification: {
-                channelId: "basic_channel",
-                priority: "max",
-                defaultSound: true,
-                defaultVibrateTimings: true,
-              },
-          },
-         data: {
-            channelKey: "basic_channel",
-            click_action: "FLUTTER_NOTIFICATION_CLICK",
-           },
+    // 🔔 بناء الرسالة
+    const message = {
+      tokens,
+      notification: {
+        title,
+        body,
+        ...(imageUrl && { imageUrl }),
+      },
+      android: {
+        priority: "high",
+        notification: {
+          channelId: "basic_channel",
+          priority: "max",
+          defaultSound: true,
+          defaultVibrateTimings: true,
+          ...(imageUrl && { imageUrl }),
+        },
+      },
+      data: {
+        click_action: "FLUTTER_NOTIFICATION_CLICK",
+        ...(postId && { postId }),
+      },
     };
 
-    const response = await admin.messaging().sendEachForMulticast(message);
+    const response = await admin
+      .messaging()
+      .sendEachForMulticast(message);
+
+    // 💾 حفظ الإشعار في قاعدة البيانات
+    await adminClient.from("notifications").insert({
+      title,
+      body,
+      image_url: imageUrl,
+      post_id: postId,
+    });
 
     return new Response(
       JSON.stringify({
@@ -85,7 +158,7 @@ Deno.serve(async (req) => {
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
-  } catch (err) {
+  } catch (err: any) {
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },

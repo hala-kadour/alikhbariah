@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../config/theme/app_icons.dart';
-import '../../domain/models/locale_post.dart';
+import '../../domain/entity/locale_post.dart';
 import '../providers/bookmark_provider.dart';
 import '../widgets/saved_post_tile.dart';
 
@@ -43,9 +43,29 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
     return Scaffold(
       appBar: MainBackAppBar(
         title: collection.name,
-        action: IconButton(
-          onPressed: () => _removeCollection(collection.id),
-          icon: Icon(AppIcons.deleteLight, color: AppColors.error600),
+        action: PopupMenuButton(
+          itemBuilder: (context) => [
+            PopupMenuItem(
+              child: Row(
+                spacing: 8.0,
+                children: [Icon(AppIcons.editSquareLight), Text("Edit".i18n)],
+              ),
+            ),
+            PopupMenuItem(
+              onTap: () => _removeCollection(collection.id),
+              child: Row(
+                spacing: 8.0,
+                children: [
+                  Icon(AppIcons.deleteLight, color: AppColors.errorDefault),
+                  Text(
+                    "Delete".i18n,
+                    style: TextStyle(color: AppColors.errorDefault),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          icon: Icon(AppIcons.moreCircleLight),
         ),
       ),
       body: Column(
@@ -55,7 +75,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
             child: TextField(
               onChanged: (value) => setState(() => _searchQuery = value),
               decoration: InputDecoration(
-                hintText: "Search saved news",
+                hintText: "Search saved news".i18n,
                 prefixIcon: const Icon(AppIcons.searchLight),
               ),
             ),
