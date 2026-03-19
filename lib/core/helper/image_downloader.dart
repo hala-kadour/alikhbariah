@@ -1,7 +1,9 @@
+import 'dart:developer';
 import 'dart:io';
+
 import 'package:dio/dio.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 class ImageDownloader {
   static Future<String?> downloadAndSaveImage(
@@ -34,7 +36,7 @@ class ImageDownloader {
       // نرجع المسار المحلي لنخزنه في ObjectBox
       return savedPath;
     } catch (e) {
-      print("Error downloading image: $e");
+      log("Error downloading image: $e");
       return null;
     }
   }
@@ -48,7 +50,7 @@ class ImageDownloader {
         await file.delete();
       }
     } catch (e) {
-      print("Error deleting local image: $e");
+      log("Error deleting local image: $e");
     }
   }
 }

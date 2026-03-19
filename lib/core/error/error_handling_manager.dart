@@ -23,6 +23,17 @@ mixin ErrorHandlingManager {
     }
   }
 
+  Either<Failure, T> safeCallLocal<T>(T Function() action) {
+    try {
+      final result = action();
+      return Right(result);
+    } on CacheException catch (e) {
+      return Left(CacheFailure(e.toString()));
+    } catch (e) {
+      return Left(ServerFailure("Local Error: ${e.toString()}"));
+    }
+  }
+
   Stream<Either<Failure, T>> safeStream<T>(Stream<T> stream) {
     return stream.transform(
       StreamTransformer<T, Either<Failure, T>>.fromHandlers(

@@ -120,7 +120,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
   void _removePost(String remoteId, int collectionId) {
     ref
         .read(bookmarkNotifierProvider.notifier)
-        .removePostFromCollection(remoteId, collectionId);
+        .removePost(remoteId: remoteId, collectionId: collectionId);
   }
 
   void _removeCollection(int collectionId) {

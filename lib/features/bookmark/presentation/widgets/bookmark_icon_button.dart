@@ -65,7 +65,9 @@ class BookmarkIconButton extends ConsumerWidget {
           ),
           TextButton(
             onPressed: () {
-              ref.read(bookmarkNotifierProvider.notifier).unsavePost(post.id);
+              ref
+                  .read(bookmarkNotifierProvider.notifier)
+                  .removePost(remoteId: post.id);
               Navigator.pop(context);
               ref.invalidate(isSavedProvider(post.id));
             },
@@ -112,9 +114,8 @@ class BookmarkIconButton extends ConsumerWidget {
                         await ref
                             .read(bookmarkNotifierProvider.notifier)
                             .savePost(post: post, collectionId: collection.id);
+                        if (!context.mounted) return;
                         context.pop();
-
-                        ref.invalidate(isSavedProvider(post.id));
                       },
                     ),
                   ),

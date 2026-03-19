@@ -1,71 +1,70 @@
 import 'dart:io';
 
-import 'package:alikhbariah/features/bookmark/data/datasource/bookmark_locale_data_source.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/add_post_to_collection_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/delete_collection_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/get_all_collections_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/get_collection_posts_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/get_post_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/is_post_saved_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/remove_post_from_collection_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/save_collection_use_case.dart';
 import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:alikhbariah/injection_container.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/helper/image_downloader.dart';
-import '../../../../core/services/object_box_service.dart';
 import '../../domain/entity/locale_post.dart';
 
-final objectBoxProvider = Provider<ObjectBoxService>(
-  (ref) => sl<ObjectBoxService>(),
+final addPostToCollectionUC = Provider(
+  (ref) => sl<AddPostToCollectionUseCase>(),
 );
+final deleteCollectionUC = Provider((ref) => sl<DeleteCollectionUseCase>());
+final getAllCollectionUC = Provider((ref) => sl<GetAllCollectionsUseCase>());
+final getCollectionPostsUc = Provider((ref) => sl<GetCollectionPostsUseCase>());
+final getPostUC = Provider((ref) => sl<GetPostUseCase>());
+final isPostSavedUC = Provider((ref) => sl<IsPostSavedUseCase>());
+final removePostFromCollectionUC = Provider(
+  (ref) => sl<RemovePostFromCollectionUseCase>(),
+);
+final saveCollectionUC = Provider((ref) => sl<SaveCollectionUseCase>());
 
-final bookmarkRepositoryProvider = Provider((ref) {
-  final service = ref.watch(objectBoxProvider);
-  return BookmarkLocalDataSource(service);
-});
-
-// بروفايدر لفحص هل البوست محفوظ أم لا
 final isSavedProvider = Provider.family<bool, String>((ref, remoteId) {
-  final dataSource = ref.watch(bookmarkRepositoryProvider);
-  return dataSource.isPostSaved(remoteId);
+  final useCase = ref.watch(isPostSavedUC);
+  final result = useCase.call(remoteId);
+  return result.fold((failure) => throw failure.message, (isSaved) => isSaved);
 });
 
 final bookmarkNotifierProvider =
     StateNotifierProvider<BookmarkNotifier, List<LocalCollection>>((ref) {
-      return BookmarkNotifier(ref.watch(bookmarkRepositoryProvider));
+      return BookmarkNotifier(ref);
     });
 
 class BookmarkNotifier extends StateNotifier<List<LocalCollection>> {
-  final BookmarkLocalDataSource _dataSource;
+  final Ref _ref;
 
-  BookmarkNotifier(this._dataSource) : super([]) {
+  BookmarkNotifier(this._ref) : super([]) {
     refresh();
   }
 
   void refresh() {
-    state = _dataSource.getAllCollections();
+    final result = _ref.read(getAllCollectionUC).call();
+    result.fold((failure) => null, (collections) => state = collections);
   }
 
-  // إنشاء كولكشن جديدة
-  void createCollection(String name) {
-    _dataSource.saveCollection(LocalCollection(name: name));
+  void saveCollection(String name) {
+    _ref.read(saveCollectionUC).call(LocalCollection(name: name));
     refresh();
   }
 
-  // تعديل اسم كولكشن
-  void renameCollection(int id, String newName) {
-    final collection = state.firstWhere((c) => c.id == id);
-    collection.name = newName;
-    _dataSource.saveCollection(collection);
-    refresh();
-  }
-
-  // حذف كولكشن
   void deleteCollection(int id) {
-    _dataSource.deleteCollection(id);
+    _ref.read(deleteCollectionUC).call(id);
     refresh();
   }
 
-  // 1️⃣ تابع الحفظ المخصص
   Future<void> savePost({
     required PostModel post,
     required int collectionId,
   }) async {
-    // تحميل الصورة يدوياً لضمان الـ Offline
     final localPath = await ImageDownloader.downloadAndSaveImage(
       post.imageUrl ?? '',
       post.id,
@@ -77,62 +76,59 @@ class BookmarkNotifier extends StateNotifier<List<LocalCollection>> {
       summary: post.summary ?? '',
       content: post.content,
       imageUrl: post.imageUrl,
-      localImagePath: localPath, // حفظ المسار المحلي
+      localImagePath: localPath,
       savedAt: DateTime.now(),
     );
 
-    await _dataSource.addPostToCollection(localPost, collectionId);
-    refresh();
+    final result = await _ref
+        .read(addPostToCollectionUC)
+        .call(
+          AddPostToCollectionParam(post: localPost, collectionId: collectionId),
+        );
+    result.fold((l) => null, (r) => refresh());
   }
 
-  // 2️⃣ تابع إلغاء الحفظ المخصص (حذف من كل المجموعات)
-  Future<void> unsavePost(String remoteId) async {
-    final post = _dataSource.getPostById(remoteId);
+  Future<void> removePost({required String remoteId, int? collectionId}) async {
+    final postResult = _ref.read(getPostUC).call(remoteId);
 
-    if (post != null) {
-      for (final collection in post.collections.toList()) {
-        _dataSource.removePostFromCollection(post.id, collection.id);
+    postResult.fold((l) => null, (post) async {
+      if (post != null) {
+        final result = _ref
+            .read(removePostFromCollectionUC)
+            .call(
+              RemovePostFormCollectioParam(
+                postId: post.id,
+                collectionId: collectionId ?? post.collections.first.id,
+              ),
+            );
+
+        result.fold((l) => null, (r) async {
+          if (post.collections.length <= 1 && post.localImagePath != null) {
+            final file = File(post.localImagePath!);
+            if (await file.exists()) await file.delete();
+          }
+          refresh();
+        });
       }
-
-      if (post.localImagePath != null) {
-        final file = File(post.localImagePath!);
-        if (await file.exists()) await file.delete();
-      }
-
-      refresh();
-    }
+    });
   }
 
-  Future<void> removePostFromCollection(
-    String remoteId,
-    int collectionId,
-  ) async {
-    final post = _dataSource.getPostById(remoteId);
-
-    if (post != null) {
-      _dataSource.removePostFromCollection(post.id, collectionId);
-      if (post.collections.isEmpty && post.localImagePath != null) {
-        final file = File(post.localImagePath!);
-        if (await file.exists()) await file.delete();
-      }
-
-      refresh();
-    }
-  }
-
-  // 3️⃣ التابع المنظم (The Orchestrator)
   Future<void> toggleBookmark({
     required PostModel post,
-    int? collectionId, // اختياري في حال كان التبديل هو إلغاء حفظ
+    int? collectionId,
   }) async {
-    final isAlreadySaved = _dataSource.isPostSaved(post.id);
+    final isSavedResult = _ref.read(isPostSavedUC).call(post.id);
 
-    if (isAlreadySaved) {
-      await unsavePost(post.id);
-    } else {
-      if (collectionId != null) {
-        await savePost(post: post, collectionId: collectionId);
+    isSavedResult.fold((l) => null, (isSaved) async {
+      if (isSaved) {
+        if (collectionId != null) {
+          await removePost(remoteId: post.id, collectionId: collectionId);
+        }
+      } else {
+        if (collectionId != null) {
+          await savePost(post: post, collectionId: collectionId);
+        }
       }
-    }
+    });
   }
 }

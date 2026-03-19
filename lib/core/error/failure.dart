@@ -13,6 +13,10 @@ class NetworkFailure extends Failure {
   NetworkFailure() : super('Checkout your internet connection'.i18n);
 }
 
+class CacheFailure extends Failure {
+  CacheFailure(super.message);
+}
+
 class UnknownFailure extends Failure {
   UnknownFailure() : super('Something went wrong'.i18n);
 }

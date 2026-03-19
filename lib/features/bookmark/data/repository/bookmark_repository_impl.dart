@@ -23,40 +23,35 @@ class BookmarkRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, bool>> deleteCollection(int id) {
-    return safeCall(() => _bookmarkLocaleDataSource.deleteCollection(id));
+  Either<Failure, bool> deleteCollection(int id) {
+    return safeCallLocal(() => _bookmarkLocaleDataSource.deleteCollection(id));
   }
 
   @override
-  Future<Either<Failure, List<LocalCollection>>> getAllCollections() {
-    return safeCall(() => _bookmarkLocaleDataSource.getAllCollections());
+  Either<Failure, List<LocalCollection>> getAllCollections() {
+    return safeCallLocal(() => _bookmarkLocaleDataSource.getAllCollections());
   }
 
   @override
-  Future<Either<Failure, LocalPost?>> getPostById(String remoteId) {
-    return safeCall(() => _bookmarkLocaleDataSource.getPostById(remoteId));
+  Either<Failure, LocalPost?> getPostById(String remoteId) {
+    return safeCallLocal(() => _bookmarkLocaleDataSource.getPostById(remoteId));
   }
 
   @override
-  Future<Either<Failure, List<LocalPost>>> getPostsByCollection(
-    int collectionId,
-  ) {
-    return safeCall(
+  Either<Failure, List<LocalPost>> getPostsByCollection(int collectionId) {
+    return safeCallLocal(
       () => _bookmarkLocaleDataSource.getPostsByCollection(collectionId),
     );
   }
 
   @override
-  Future<Either<Failure, bool>> isPostSaved(String remoteId) {
-    return safeCall(() => _bookmarkLocaleDataSource.isPostSaved(remoteId));
+  Either<Failure, bool> isPostSaved(String remoteId) {
+    return safeCallLocal(() => _bookmarkLocaleDataSource.isPostSaved(remoteId));
   }
 
   @override
-  Future<Either<Failure, void>> removePostFromCollection(
-    int postId,
-    int collectionId,
-  ) {
-    return safeCall(
+  Either<Failure, void> removePostFromCollection(int postId, int collectionId) {
+    return safeCallLocal(
       () => _bookmarkLocaleDataSource.removePostFromCollection(
         postId,
         collectionId,
@@ -65,7 +60,9 @@ class BookmarkRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, int>> saveCollection(LocalCollection collection) {
-    return safeCall(() => _bookmarkLocaleDataSource.saveCollection(collection));
+  Either<Failure, int> saveCollection(LocalCollection collection) {
+    return safeCallLocal(
+      () => _bookmarkLocaleDataSource.saveCollection(collection),
+    );
   }
 }

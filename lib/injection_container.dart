@@ -1,5 +1,13 @@
 import 'package:alikhbariah/config/constant/app_env.dart';
 import 'package:alikhbariah/core/services/object_box_service.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/add_post_to_collection_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/delete_collection_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/get_all_collections_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/get_collection_posts_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/get_post_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/is_post_saved_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/remove_post_from_collection_use_case.dart';
+import 'package:alikhbariah/features/bookmark/domain/usecases/save_collection_use_case.dart';
 import 'package:alikhbariah/features/explore/data/datasource/explore_supabase_data_source.dart';
 import 'package:alikhbariah/features/explore/data/repository/explore_repository_impl.dart';
 import 'package:alikhbariah/features/explore/domain/repository/explore_repository.dart';
@@ -22,6 +30,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'features/bookmark/data/datasource/bookmark_locale_data_source.dart';
+import 'features/bookmark/data/repository/bookmark_repository_impl.dart';
+import 'features/bookmark/domain/repository/bookmark_repository.dart';
 import 'features/home/data/repository/home_repository_impl.dart';
 import 'features/home/domain/repository/home_repository.dart';
 import 'features/home/domain/usecases/get_latest_posts_use_case.dart';
@@ -52,6 +63,7 @@ Future<void> init() async {
   // 4. Features
   _initHomeFeature();
   _initExploreFeature();
+  _initBookmarkFeature();
   _initNotificationFeature();
 }
 
@@ -89,6 +101,28 @@ void _initExploreFeature() {
   sl.registerLazySingleton(() => GetTagPostsUseCase(sl()));
   sl.registerLazySingleton(() => GetPostTagsUseCase(sl()));
   sl.registerLazySingleton(() => GetSearchedPostsUseCase(sl()));
+}
+
+void _initBookmarkFeature() {
+  // 1. Data Source
+  sl.registerLazySingleton<BookmarkLocaleDataSource>(
+    () => BookmarkLocaleDataSourceImpl(sl()),
+  );
+
+  // 2. Repository
+  sl.registerLazySingleton<BookmarkRepository>(
+    () => BookmarkRepositoryImpl(sl()),
+  );
+
+  // 3. Use Cases
+  sl.registerLazySingleton(() => AddPostToCollectionUseCase(sl()));
+  sl.registerLazySingleton(() => DeleteCollectionUseCase(sl()));
+  sl.registerLazySingleton(() => GetAllCollectionsUseCase(sl()));
+  sl.registerLazySingleton(() => GetCollectionPostsUseCase(sl()));
+  sl.registerLazySingleton(() => GetPostUseCase(sl()));
+  sl.registerLazySingleton(() => IsPostSavedUseCase(sl()));
+  sl.registerLazySingleton(() => RemovePostFromCollectionUseCase(sl()));
+  sl.registerLazySingleton(() => SaveCollectionUseCase(sl()));
 }
 
 void _initNotificationFeature() {

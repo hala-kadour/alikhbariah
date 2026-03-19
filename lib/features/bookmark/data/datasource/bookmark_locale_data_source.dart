@@ -3,15 +3,15 @@ import '../../../../objectbox.g.dart';
 import '../../domain/entity/locale_post.dart';
 
 abstract class BookmarkLocaleDataSource {
-  Future<List<LocalCollection>> getAllCollections();
-  Future<int> saveCollection(LocalCollection collection);
-  Future<bool> deleteCollection(int id);
+  List<LocalCollection> getAllCollections();
+  int saveCollection(LocalCollection collection);
+  bool deleteCollection(int id);
 
   Future<void> addPostToCollection(LocalPost post, int collectionId);
-  Future<void> removePostFromCollection(int postId, int collectionId);
-  Future<List<LocalPost>> getPostsByCollection(int collectionId);
-  Future<bool> isPostSaved(String remoteId);
-  Future<LocalPost?> getPostById(String remoteId);
+  void removePostFromCollection(int postId, int collectionId);
+  List<LocalPost> getPostsByCollection(int collectionId);
+  bool isPostSaved(String remoteId);
+  LocalPost? getPostById(String remoteId);
 }
 
 class BookmarkLocaleDataSourceImpl implements BookmarkLocaleDataSource {
@@ -20,17 +20,17 @@ class BookmarkLocaleDataSourceImpl implements BookmarkLocaleDataSource {
   BookmarkLocaleDataSourceImpl(this._service);
 
   @override
-  Future<List<LocalCollection>> getAllCollections() async {
+  List<LocalCollection> getAllCollections() {
     return _service.collectionBox.getAll();
   }
 
   @override
-  Future<int> saveCollection(LocalCollection collection) async {
+  int saveCollection(LocalCollection collection) {
     return _service.collectionBox.put(collection);
   }
 
   @override
-  Future<bool> deleteCollection(int id) async {
+  bool deleteCollection(int id) {
     return _service.collectionBox.remove(id);
   }
 
@@ -52,7 +52,7 @@ class BookmarkLocaleDataSourceImpl implements BookmarkLocaleDataSource {
   }
 
   @override
-  Future<void> removePostFromCollection(int postId, int collectionId) async {
+  void removePostFromCollection(int postId, int collectionId) {
     final collection = _service.collectionBox.get(collectionId);
     if (collection != null) {
       collection.posts.removeWhere((p) => p.id == postId);
@@ -69,13 +69,13 @@ class BookmarkLocaleDataSourceImpl implements BookmarkLocaleDataSource {
   }
 
   @override
-  Future<List<LocalPost>> getPostsByCollection(int collectionId) async {
+  List<LocalPost> getPostsByCollection(int collectionId) {
     final collection = _service.collectionBox.get(collectionId);
     return collection?.posts.toList() ?? [];
   }
 
   @override
-  Future<bool> isPostSaved(String remoteId) async {
+  bool isPostSaved(String remoteId) {
     final query = _service.postBox
         .query(LocalPost_.remoteId.equals(remoteId))
         .build();
@@ -85,7 +85,7 @@ class BookmarkLocaleDataSourceImpl implements BookmarkLocaleDataSource {
   }
 
   @override
-  Future<LocalPost?> getPostById(String remoteId) async {
+  LocalPost? getPostById(String remoteId) {
     final query = _service.postBox
         .query(LocalPost_.remoteId.equals(remoteId))
         .build();

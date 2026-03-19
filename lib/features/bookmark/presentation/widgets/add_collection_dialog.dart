@@ -62,7 +62,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                           if (_controller.text.isNotEmpty) {
                             ref
                                 .read(bookmarkNotifierProvider.notifier)
-                                .createCollection(_controller.text);
+                                .saveCollection(_controller.text);
                             Navigator.pop(context);
                           }
                         },

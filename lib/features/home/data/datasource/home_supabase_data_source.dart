@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../models/post/post_model.dart';
@@ -81,7 +83,7 @@ class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
       // تحويل النتيجة مباشرة لموديل
       return response.map<PostModel>((e) => PostModel.fromJson(e)).toList();
     } catch (e) {
-      print('Error in RPC get_related_posts: $e');
+      log('Error in RPC get_related_posts: $e');
       return [];
     }
   }
