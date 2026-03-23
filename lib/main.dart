@@ -12,14 +12,6 @@ import 'injection_container.dart' as di;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  // await Localization.loadArabicFromJson();
-
-  // await AppEnv.init();
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await Supabase.initialize(url: AppEnv.baseUrl, anonKey: AppEnv.annonKey);
-
-  // final dbService = await ObjectBoxService.init();
-  // await NotificationService().initialize();
   runApp(ProviderScope(child: I18n(autoSaveLocale: true, child: MainApp())));
 }
 

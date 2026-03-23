@@ -20,6 +20,8 @@ import 'package:alikhbariah/features/home/domain/usecases/get_breaking_posts_use
 import 'package:alikhbariah/features/home/domain/usecases/get_featured_posts_use_case.dart';
 import 'package:alikhbariah/features/home/domain/usecases/get_post_tags_use_case.dart';
 import 'package:alikhbariah/features/home/domain/usecases/get_related_posts_use_case.dart';
+import 'package:alikhbariah/features/home/domain/usecases/get_videos_categories_use_case.dart';
+import 'package:alikhbariah/features/home/domain/usecases/get_videos_use_case.dart';
 import 'package:alikhbariah/features/notifications/data/datasource/notification_supabase_data_source.dart';
 import 'package:alikhbariah/features/notifications/data/repository/notification_repository_impl.dart';
 import 'package:alikhbariah/features/notifications/domain/repository/notification_repository.dart';
@@ -80,7 +82,8 @@ void _initHomeFeature() {
   sl.registerLazySingleton(() => GetBreakingPostsUseCase(sl()));
   sl.registerLazySingleton(() => GetFeaturedPostsUseCase(sl()));
   sl.registerLazySingleton(() => GetLatestPostsUseCase(sl()));
-  sl.registerLazySingleton(() => GetPostTagsUseCase(sl()));
+  sl.registerLazySingleton(() => GetVideosCategoriesUseCase(sl()));
+  sl.registerLazySingleton(() => GetVideosUseCase(sl()));
   sl.registerLazySingleton(() => GetRelatedPostsUseCase(sl()));
 }
 

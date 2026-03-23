@@ -4,6 +4,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../models/post/post_model.dart';
 import '../models/tag/tag_model.dart';
+import '../models/video/video_category_model.dart';
+import '../models/video/video_model.dart';
 
 abstract class HomeSupabaseDataSource {
   Stream<List<PostModel>> getFeaturedPosts();
@@ -11,6 +13,8 @@ abstract class HomeSupabaseDataSource {
   Future<List<PostModel>> getLatestPosts();
   Future<List<TagModel>> getTagsByPostId(String? id);
   Future<List<PostModel>> getRelatedPostsByPostId(String? id);
+  Future<List<VideoCategoryModel>> getVideosCategories(String type);
+  Future<List<VideoModel>> getVideos(String categoryId);
 }
 
 class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
@@ -20,6 +24,8 @@ class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
   final String _postTable = 'posts';
   final String _postTagsTabel = 'post_tags';
   final String _tagTable = 'tags';
+  final String _videoCategoriesTable = 'video_categories';
+  final String _videos = "videos";
 
   // ==============================
   // Breaking News
@@ -64,6 +70,31 @@ class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
         .limit(10);
 
     return response.map<PostModel>((e) => PostModel.fromJson(e)).toList();
+  }
+
+  // ==============================
+  // Video Category
+  // ==============================
+  @override
+  Future<List<VideoCategoryModel>> getVideosCategories(String type) async {
+    final response = await _client
+        .from(_videoCategoriesTable)
+        .select('*')
+        .eq('type', type)
+        .order('name');
+    return response
+        .map<VideoCategoryModel>((e) => VideoCategoryModel.fromJson(e))
+        .toList();
+  }
+
+  @override
+  Future<List<VideoModel>> getVideos(String categoryId) async {
+    final response = await _client
+        .from(_videos)
+        .select()
+        .eq('category_id', categoryId)
+        .order('created_at', ascending: false);
+    return response.map<VideoModel>((e) => VideoModel.fromJson(e)).toList();
   }
 
   // ==============================

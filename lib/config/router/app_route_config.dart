@@ -5,6 +5,11 @@ class AppRouteConfig {
   static const onboarding = 'onboarding';
   // Home
   static const home = 'home';
+  static const breakingNews = 'breaking-news';
+  static const latestPosts = 'latest-posts';
+  static const videosCategories = 'videos-categories';
+  static const videos = 'videos';
+  static const videoPlayer = 'video-player';
   static const postDetails = 'post-details';
   // Explore
   static const explore = 'explore';

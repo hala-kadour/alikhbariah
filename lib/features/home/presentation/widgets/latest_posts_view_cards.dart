@@ -20,7 +20,7 @@ class LatestPostsViewCards extends StatelessWidget {
           data: (data) => ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: data.length,
+            itemCount: data.length > 3 ? 3 : data.length,
             itemBuilder: (context, index) {
               if (data.isEmpty) {
                 return EmptyStatusAnimation();

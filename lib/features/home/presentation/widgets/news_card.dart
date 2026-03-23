@@ -51,9 +51,7 @@ class NewsCard extends StatelessWidget {
                             post.categoryName,
                             style: Theme.of(context).textTheme.labelMedium!
                                 .copyWith(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondaryFixed,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                           ),
                           Gap.w8,

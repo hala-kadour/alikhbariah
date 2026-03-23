@@ -4,6 +4,12 @@ import 'package:alikhbariah/features/explore/presentation/pages/actaul_search_pa
 import 'package:alikhbariah/features/explore/presentation/pages/search_page.dart';
 import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:alikhbariah/features/home/data/models/tag/tag_model.dart';
+import 'package:alikhbariah/features/home/data/models/video/video_category_model.dart';
+import 'package:alikhbariah/features/home/presentation/pages/breaking_news_page.dart';
+import 'package:alikhbariah/features/home/presentation/pages/latest_posts_page.dart';
+import 'package:alikhbariah/features/home/presentation/pages/video_player_page.dart';
+import 'package:alikhbariah/features/home/presentation/pages/videos_categories_page.dart';
+import 'package:alikhbariah/features/home/presentation/pages/videos_page.dart';
 import 'package:alikhbariah/features/intro/pages/splash_page.dart';
 import 'package:alikhbariah/features/intro/provider/intro_provider.dart';
 import 'package:alikhbariah/features/notifications/presentation/pages/notification_page.dart';
@@ -83,6 +89,38 @@ final routerProvider = Provider<GoRouter>((ref) {
                 name: AppRouteConfig.home,
                 path: '/home',
                 builder: (context, state) => const HomePage(),
+                routes: [
+                  GoRoute(
+                    name: AppRouteConfig.breakingNews,
+                    path: 'breaking-news',
+                    builder: (context, state) => BreakingNewsPage(),
+                  ),
+                  GoRoute(
+                    name: AppRouteConfig.latestPosts,
+                    path: 'latest-posts',
+                    builder: (context, state) => LatestPostsPage(),
+                  ),
+                  GoRoute(
+                    name: AppRouteConfig.videosCategories,
+                    path: 'videos-categories',
+                    builder: (context, state) =>
+                        VideosCategoriesPage(type: state.extra as String),
+                  ),
+                  GoRoute(
+                    name: AppRouteConfig.videos,
+                    path: 'videos',
+                    builder: (context, state) =>
+                        VideosPage(category: state.extra as VideoCategoryModel),
+                    routes: [
+                      GoRoute(
+                        name: AppRouteConfig.videoPlayer,
+                        path: 'video-player',
+                        builder: (context, state) =>
+                            VideoPlayerPage(videoId: state.extra as String),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

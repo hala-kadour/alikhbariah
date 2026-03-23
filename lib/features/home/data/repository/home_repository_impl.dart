@@ -3,6 +3,8 @@ import 'package:alikhbariah/core/error/failure.dart';
 import 'package:alikhbariah/features/home/data/datasource/home_supabase_data_source.dart';
 import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:alikhbariah/features/home/data/models/tag/tag_model.dart';
+import 'package:alikhbariah/features/home/data/models/video/video_category_model.dart';
+import 'package:alikhbariah/features/home/data/models/video/video_model.dart';
 import 'package:alikhbariah/features/home/domain/repository/home_repository.dart';
 import 'package:dartz/dartz.dart';
 
@@ -33,5 +35,17 @@ class HomeRepositoryImpl with ErrorHandlingManager implements HomeRepository {
   @override
   Future<Either<Failure, List<TagModel>>> getTagsByPostId(String? id) {
     return safeCall(() => _homeSupabaseDatasource.getTagsByPostId(id));
+  }
+
+  @override
+  Future<Either<Failure, List<VideoModel>>> getVideos(String categoryId) {
+    return safeCall(() => _homeSupabaseDatasource.getVideos(categoryId));
+  }
+
+  @override
+  Future<Either<Failure, List<VideoCategoryModel>>> getVideosCategories(
+    String type,
+  ) {
+    return safeCall(() => _homeSupabaseDatasource.getVideosCategories(type));
   }
 }
