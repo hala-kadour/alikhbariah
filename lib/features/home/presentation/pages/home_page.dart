@@ -3,8 +3,9 @@ import 'package:alikhbariah/config/scales/gap.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/latest_posts_view_cards.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/section_title.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/video_categories_view.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
-import 'package:alikhbariah/translation/translation.dart';
 import 'package:go_router/go_router.dart';
 
 import '../widgets/breaking_news_page_view.dart';
@@ -31,20 +32,20 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   SectionTitle(
-                    title: "Breaking News".i18n,
+                    title: LocaleKeys.breaking_news.tr(),
                     onPressed: () =>
                         context.pushNamed(AppRouteConfig.breakingNews),
                   ),
                   BreakingNewsPageView(),
                   Gap.h16,
                   SectionTitle(
-                    title: "Latest Posts".i18n,
+                    title: LocaleKeys.latest_news.tr(),
                     onPressed: () =>
                         context.pushNamed(AppRouteConfig.latestPosts),
                   ),
                   LatestPostsViewCards(),
                   SectionTitle(
-                    title: "News Videos".i18n,
+                    title: LocaleKeys.news_videos.tr(),
                     onPressed: () => context.pushNamed(
                       AppRouteConfig.videosCategories,
                       extra: "news_video",
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   VideoCategoriesView(type: "news_video"),
                   SectionTitle(
-                    title: "Programs".i18n,
+                    title: LocaleKeys.programs.tr(),
                     onPressed: () => context.pushNamed(
                       AppRouteConfig.videosCategories,
                       extra: "program",

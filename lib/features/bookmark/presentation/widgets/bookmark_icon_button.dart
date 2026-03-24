@@ -1,5 +1,6 @@
 import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,16 +53,12 @@ class BookmarkIconButton extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Cancel".i18n),
-        content: Text(
-          "Are you sure you want to delete this news item form\nall saved groups?"
-              .i18n,
-          textAlign: .center,
-        ),
+        title: Text(LocaleKeys.cancel.tr()),
+        content: Text(LocaleKeys.delete_item_confirm.tr(), textAlign: .center),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Cancel".i18n),
+            child: Text(LocaleKeys.cancel.tr()),
           ),
           TextButton(
             onPressed: () {
@@ -71,7 +68,10 @@ class BookmarkIconButton extends ConsumerWidget {
               Navigator.pop(context);
               ref.invalidate(isSavedProvider(post.id));
             },
-            child: Text("Delete".i18n, style: TextStyle(color: Colors.red)),
+            child: Text(
+              LocaleKeys.delete.tr(),
+              style: TextStyle(color: Colors.red),
+            ),
           ),
         ],
       ),
@@ -99,7 +99,7 @@ class BookmarkIconButton extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Save in a collection".i18n,
+                    LocaleKeys.save_in_collection.tr(),
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Gap.h16,

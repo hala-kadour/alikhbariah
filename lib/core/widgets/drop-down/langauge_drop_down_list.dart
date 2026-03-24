@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:i18n_extension/i18n_extension.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 
@@ -50,11 +50,11 @@ class _TopSettingsRowState extends State<TopSettingsRow> {
                 if (value == null) return;
                 switch (value) {
                   case 'Arabic':
-                    I18n.of(context).locale = const Locale('ar', 'SA');
+                    context.setLocale(const Locale('ar', 'SA'));
                     break;
                   case 'English':
                   default:
-                    I18n.of(context).locale = const Locale('en', 'US');
+                    context.setLocale(const Locale('en', 'US'));
                     break;
                 }
               },

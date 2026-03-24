@@ -1,7 +1,8 @@
 import 'package:alikhbariah/config/constant/assets_path.dart';
 import 'package:alikhbariah/config/theme/app_colors.dart';
 import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -48,7 +49,10 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
             PopupMenuItem(
               child: Row(
                 spacing: 8.0,
-                children: [Icon(AppIcons.editSquareLight), Text("Edit".i18n)],
+                children: [
+                  Icon(AppIcons.editSquareLight),
+                  Text(LocaleKeys.edit.tr()),
+                ],
               ),
             ),
             PopupMenuItem(
@@ -58,7 +62,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
                 children: [
                   Icon(AppIcons.deleteLight, color: AppColors.errorDefault),
                   Text(
-                    "Delete".i18n,
+                    LocaleKeys.delete.tr(),
                     style: TextStyle(color: AppColors.errorDefault),
                   ),
                 ],
@@ -75,7 +79,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
             child: TextField(
               onChanged: (value) => setState(() => _searchQuery = value),
               decoration: InputDecoration(
-                hintText: "Search saved news".i18n,
+                hintText: LocaleKeys.search_saved.tr(),
                 prefixIcon: const Icon(AppIcons.searchLight),
               ),
             ),
@@ -109,7 +113,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
           Lottie.asset(AnimationsPath.noData, width: 200),
           const SizedBox(height: 16),
           Text(
-            "No saved news found".i18n,
+            LocaleKeys.no_saved_news.tr(),
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],

@@ -1,4 +1,5 @@
-import 'package:i18n_extension/default.i18n.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 
 class TimeFormatter {
   static String timeAgo(DateTime dateTime) {
@@ -6,11 +7,11 @@ class TimeFormatter {
     final difference = now.difference(dateTime);
 
     if (difference.inSeconds < 60) {
-      return "Momments ago".i18n;
+      return LocaleKeys.moments_ago.tr();
     }
 
     if (difference.inMinutes < 60) {
-      return "${difference.inMinutes} Minutes ago".i18n;
+      return LocaleKeys.moments_ago.tr();
     }
 
     if (difference.inHours < 24) {

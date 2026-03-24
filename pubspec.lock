@@ -313,6 +313,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0-pre6"
+  easy_localization:
+    dependency: "direct main"
+    description:
+      name: easy_localization
+      sha256: "2ccdf9db8fe4d9c5a75c122e6275674508fd0f0d49c827354967b8afcc56bbed"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.8"
+  easy_logger:
+    dependency: transitive
+    description:
+      name: easy_logger
+      sha256: c764a6e024846f33405a2342caf91c62e357c24b02c04dbc712ef232bf30ffb7
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   ed25519_edwards:
     dependency: transitive
     description:
@@ -321,14 +337,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.1"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      sha256: "3e0141505477fd8ad55d6eb4e7776d3fe8430be8e497ccb1521370c3f21a3e2b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.8"
   fake_async:
     dependency: transitive
     description:
@@ -519,7 +527,7 @@ packages:
     source: hosted
     version: "6.0.0"
   flutter_localizations:
-    dependency: "direct main"
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -597,14 +605,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.2.1"
-  gettext_parser:
-    dependency: transitive
-    description:
-      name: gettext_parser
-      sha256: "9565c9dd1033ec125e1fbc7ccba6c0d2d753dd356122ba1a17e6aa7dc868f34a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
   glob:
     dependency: transitive
     description:
@@ -693,30 +693,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
-  i18n_extension:
-    dependency: "direct main"
-    description:
-      name: i18n_extension
-      sha256: f6b86df6e7cd1992dda71bb65f7927571d08165e6b115d1329b6927e4a2ef4d9
-      url: "https://pub.dev"
-    source: hosted
-    version: "15.1.0"
-  i18n_extension_core:
-    dependency: transitive
-    description:
-      name: i18n_extension_core
-      sha256: "5d17d355b95882e803f89c97cad610ab7967a798f8e519563d274f7888bc968e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.2"
-  i18n_extension_importer:
-    dependency: "direct dev"
-    description:
-      name: i18n_extension_importer
-      sha256: "4fd651ff47ac52f604b34b5cd80ee225d38fe589d51b042f00178081b476252f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.6"
   image:
     dependency: transitive
     description:
@@ -1218,14 +1194,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.2"
-  sprintf:
-    dependency: transitive
-    description:
-      name: sprintf
-      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:

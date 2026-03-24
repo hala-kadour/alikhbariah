@@ -1,4 +1,5 @@
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 
 abstract class Failure {
   final String message;
@@ -10,7 +11,7 @@ class ServerFailure extends Failure {
 }
 
 class NetworkFailure extends Failure {
-  NetworkFailure() : super('Checkout your internet connection'.i18n);
+  NetworkFailure() : super(LocaleKeys.check_connection.tr());
 }
 
 class CacheFailure extends Failure {
@@ -18,5 +19,5 @@ class CacheFailure extends Failure {
 }
 
 class UnknownFailure extends Failure {
-  UnknownFailure() : super('Something went wrong'.i18n);
+  UnknownFailure() : super(LocaleKeys.something_wrong.tr());
 }

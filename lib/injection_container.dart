@@ -27,7 +27,7 @@ import 'package:alikhbariah/features/notifications/data/repository/notification_
 import 'package:alikhbariah/features/notifications/domain/repository/notification_repository.dart';
 import 'package:alikhbariah/features/notifications/domain/usecases/get_notification_use_case.dart';
 import 'package:alikhbariah/firebase_options.dart';
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -45,7 +45,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
   // 1. الإعدادات والبيئة (App Services)
   await AppEnv.init();
-  await Localization.loadArabicFromJson();
+  await EasyLocalization.ensureInitialized();
 
   // 2. الخدمات الخارجية (External SDKs)
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

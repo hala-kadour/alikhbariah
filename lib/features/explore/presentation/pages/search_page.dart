@@ -1,6 +1,8 @@
 import 'package:alikhbariah/config/router/app_route_config.dart';
 import 'package:alikhbariah/core/widgets/loadings/loading_tags.dart';
 import 'package:alikhbariah/features/explore/presentation/providers/explore_providers.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +12,6 @@ import '../../../../config/theme/app_icons.dart';
 import '../../../../core/providers/recent_search_provider.dart';
 import '../../../../core/widgets/containers/custom_tag_container.dart';
 import '../../../../core/widgets/layout/navbar/main_back_app_bar.dart';
-import '../../../../translation/translation.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -29,7 +30,7 @@ class SearchPage extends StatelessWidget {
               child: AbsorbPointer(
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "search title, summary, location ...".i18n,
+                    hintText: LocaleKeys.search_placeholder.tr(),
                     prefixIcon: Icon(AppIcons.searchLight),
                     suffixIcon: Icon(AppIcons.filterLight),
                   ),
@@ -41,14 +42,14 @@ class SearchPage extends StatelessWidget {
               mainAxisAlignment: .spaceBetween,
               children: [
                 Text(
-                  "Recent search".i18n,
+                  LocaleKeys.recent_search.tr(),
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 Consumer(
                   builder: (context, ref, child) => TextButton(
                     onPressed: () =>
                         ref.watch(recentSearchProvider.notifier).clearAll(),
-                    child: Text('Clear All'.i18n),
+                    child: Text(LocaleKeys.clear_all.tr()),
                   ),
                 ),
               ],
@@ -95,7 +96,7 @@ class SearchPage extends StatelessWidget {
             ),
             Gap.h24,
             Text(
-              "Popular tags".i18n,
+              LocaleKeys.popular_tags.tr(),
               style: Theme.of(context).textTheme.titleSmall,
             ),
             Gap.h16,

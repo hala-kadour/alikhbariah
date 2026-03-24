@@ -1,4 +1,5 @@
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,7 +15,7 @@ class BreakingNewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Breaking News".i18n)),
+      appBar: AppBar(title: Text(LocaleKeys.breaking_news.tr())),
       body: Consumer(
         builder: (context, ref, child) {
           final posts = ref.watch(breakingPostsProvider);

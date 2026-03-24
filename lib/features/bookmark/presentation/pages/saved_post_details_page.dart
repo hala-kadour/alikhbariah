@@ -4,7 +4,8 @@ import 'package:alikhbariah/config/scales/gap.dart';
 import 'package:alikhbariah/config/theme/app_text_styles.dart';
 import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
 import 'package:alikhbariah/features/bookmark/domain/entity/locale_post.dart';
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 
 class SavedPostDetailsPage extends StatelessWidget {
@@ -14,7 +15,7 @@ class SavedPostDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainBackAppBar(title: "Post Details".i18n),
+      appBar: MainBackAppBar(title: LocaleKeys.post_details.tr()),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: SingleChildScrollView(

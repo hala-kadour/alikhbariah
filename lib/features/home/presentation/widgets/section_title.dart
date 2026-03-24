@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 
 class SectionTitle extends StatelessWidget {
   const SectionTitle({super.key, required this.title, required this.onPressed});
@@ -31,7 +32,10 @@ class SectionTitle extends StatelessWidget {
               ),
             ],
           ),
-          TextButton(onPressed: onPressed, child: Text("View all".i18n)),
+          TextButton(
+            onPressed: onPressed,
+            child: Text(LocaleKeys.view_all.tr()),
+          ),
         ],
       ),
     );

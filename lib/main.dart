@@ -1,7 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:i18n_extension/i18n_extension.dart';
 
 import 'config/router/app_router.dart';
 import 'config/theme/theme_data/theme_data_dark.dart';
@@ -12,7 +11,16 @@ import 'injection_container.dart' as di;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  runApp(ProviderScope(child: I18n(autoSaveLocale: true, child: MainApp())));
+  runApp(
+    ProviderScope(
+      child: EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('ar')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('en'),
+        child: const MainApp(),
+      ),
+    ),
+  );
 }
 
 class MainApp extends ConsumerWidget {
@@ -35,13 +43,9 @@ class MainApp extends ConsumerWidget {
         loading: () => ThemeMode.system,
       ),
       // Localization Thing //
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [Locale('en', 'US'), Locale('ar', 'SA')],
-      locale: I18n.locale,
+      locale: context.locale,
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
       // Routing Thing //
       routerConfig: router,
       builder: (context, child) => child!,

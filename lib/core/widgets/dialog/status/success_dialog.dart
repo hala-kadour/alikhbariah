@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:i18n_extension/default.i18n.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../config/constant/assets_path.dart';
@@ -31,7 +32,7 @@ void showSuccessDialog(BuildContext context, void Function()? onPressed) {
               ),
               Gap.h16,
               Text(
-                "Success".i18n,
+                LocaleKeys.success.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               Gap.h24,

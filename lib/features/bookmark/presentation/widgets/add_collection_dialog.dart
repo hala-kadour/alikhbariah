@@ -1,8 +1,9 @@
 import 'package:alikhbariah/config/theme/app_icons.dart';
 import 'package:alikhbariah/config/theme/app_text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:i18n_extension/default.i18n.dart';
 
 import '../providers/bookmark_provider.dart';
 
@@ -26,7 +27,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Add new bookmark".i18n,
+              LocaleKeys.add_bookmark.tr(),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 20),
@@ -36,7 +37,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                 filled: true,
                 fillColor: Theme.of(context).colorScheme.surfaceBright,
                 hoverColor: Theme.of(context).colorScheme.surfaceBright,
-                hintText: "Title".i18n,
+                hintText: LocaleKeys.title.tr(),
                 prefixIcon: const Icon(AppIcons.bookmarkLight),
               ),
             ),
@@ -47,7 +48,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                   child: TextButton(
                     onPressed: () => Navigator.pop(context),
                     child: Text(
-                      "Cancel".i18n,
+                      LocaleKeys.cancel.tr(),
                       style: AppTextStyles.buttonSecondary(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
@@ -66,7 +67,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                             Navigator.pop(context);
                           }
                         },
-                        child: Text("Save".i18n),
+                        child: Text(LocaleKeys.save.tr()),
                       );
                     },
                   ),

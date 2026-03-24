@@ -1,5 +1,6 @@
 import 'package:alikhbariah/config/theme/app_icons.dart';
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/scales/sizes_config.dart';
@@ -41,7 +42,7 @@ class _DeleteButtonState extends State<DeleteButton> {
               shape: BoxShape.circle,
             ),
             child: Tooltip(
-              message: "Delete".i18n,
+              message: LocaleKeys.delete.tr(),
               child: Icon(
                 AppIcons.deleteLight,
                 size: SizesConfig.iconsSm,

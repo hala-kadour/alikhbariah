@@ -2,7 +2,8 @@ import 'package:alikhbariah/config/router/app_route_config.dart';
 import 'package:alikhbariah/config/scales/gap.dart';
 import 'package:alikhbariah/core/helper/device_utility.dart';
 import 'package:alikhbariah/core/widgets/buttons/elevated-buttons/main_elevated_button.dart';
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -26,20 +27,15 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   final List<_OnBoardingModel> _pages = [
     _OnBoardingModel(
       image: AnimationsPath.onBoarding1,
-      title:
-          'Stay updated with the latest news, moment by moment, from a trusted source.'
-              .i18n,
+      title: LocaleKeys.onboarding_desc_1.tr(),
     ),
     _OnBoardingModel(
       image: AnimationsPath.onBoarding2,
-      title: 'Stay informed about the most important local and global events.'
-          .i18n,
+      title: LocaleKeys.onboarding_desc_2.tr(),
     ),
     _OnBoardingModel(
       image: AnimationsPath.onBoarding3,
-      title:
-          'Instant notifications… and comprehensive coverage wherever you are.'
-              .i18n,
+      title: LocaleKeys.onboarding_desc_3.tr(),
     ),
   ];
 
@@ -88,7 +84,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     _setFirst();
                     context.pushReplacementNamed(AppRouteConfig.home);
                   },
-                  child: Text('Skip'.i18n),
+                  child: Text(LocaleKeys.skip.tr()),
                 ),
               ],
             ),
@@ -160,7 +156,7 @@ class _OnBoardingItem extends StatelessWidget {
                 ),
               ),
               Gap.h24,
-              MainElevatedButton(onTap: onNext, title: "Next".i18n),
+              MainElevatedButton(onTap: onNext, title: LocaleKeys.next.tr()),
             ],
           ),
         ),

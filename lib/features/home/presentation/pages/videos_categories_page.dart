@@ -1,4 +1,5 @@
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,7 +18,9 @@ class VideosCategoriesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          type.contains('program') ? "Programs".i18n : "News Videos".i18n,
+          type.contains('program')
+              ? LocaleKeys.programs.tr()
+              : LocaleKeys.news_videos.tr(),
         ),
       ),
       body: Consumer(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:i18n_extension/default.i18n.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../config/constant/assets_path.dart';
@@ -31,7 +32,7 @@ void showErrorDialog(BuildContext context, String errorMessage) {
               ),
               Gap.h16,
               Text(
-                "Error".i18n,
+                LocaleKeys.error.tr(),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
@@ -45,7 +46,7 @@ void showErrorDialog(BuildContext context, String errorMessage) {
               Gap.h24,
               TextButton(
                 onPressed: () => context.pop(),
-                child: Text("Close".i18n),
+                child: Text(LocaleKeys.close.tr()),
               ),
             ],
           ),

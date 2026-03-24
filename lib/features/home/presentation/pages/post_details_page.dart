@@ -10,7 +10,8 @@ import 'package:alikhbariah/features/bookmark/presentation/widgets/bookmark_icon
 import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/loading_news_cards.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/related_post_card.dart';
-import 'package:alikhbariah/translation/translation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -53,7 +54,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainBackAppBar(
-        title: "Post Details".i18n,
+        title: LocaleKeys.post_details.tr(),
         action: BookmarkIconButton(post: widget.post),
       ),
       body: Padding(
@@ -135,7 +136,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
               ),
               Gap.h16,
               Text(
-                "Related Posts:".i18n,
+                LocaleKeys.related_posts.tr(),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Gap.h16,

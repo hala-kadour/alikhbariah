@@ -9,11 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-  i18n_extension: ^15.1.0
-  json_annotation: ^4.10.0
   flutter_svg: ^2.2.3
+  json_annotation: ^4.10.0
   freezed_annotation: ^3.1.0
   flutter_riverpod: ^2.6.1
   go_router: ^17.1.0
@@ -37,6 +34,7 @@ dependencies:
   youtube_player_flutter: ^9.1.3
   path: ^1.9.1
   path_provider: ^2.1.5
+  easy_localization: ^3.0.8
 
 dev_dependencies:
   flutter_test:
@@ -48,7 +46,6 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.4.0
   objectbox_generator: ^5.2.0
-  i18n_extension_importer: ^0.0.6
 
 flutter_launcher_icons:
   android: true
@@ -112,8 +109,8 @@ flutter:
         - asset: assets/icons/app_icons.ttf
   uses-material-design: true
   assets:
-    - assets/translations/
     - .env
+    - assets/translations/
     - assets/images/svgs/
     - assets/images/pngs/
     - assets/animation/

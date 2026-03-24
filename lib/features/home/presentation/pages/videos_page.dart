@@ -1,11 +1,12 @@
 import 'package:alikhbariah/config/router/app_route_config.dart';
 import 'package:alikhbariah/features/home/data/models/video/video_category_model.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:alikhbariah/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../../../translation/translation.dart';
 import '../providers/home_providers.dart';
 
 class VideosPage extends ConsumerWidget {
@@ -21,9 +22,7 @@ class VideosPage extends ConsumerWidget {
       body: videosAsync.when(
         data: (videos) {
           if (videos.isEmpty) {
-            return Center(
-              child: Text("No videos available in this category".i18n),
-            );
+            return Center(child: Text(LocaleKeys.no_videos.tr()));
           }
           return ListView.builder(
             itemCount: videos.length,
