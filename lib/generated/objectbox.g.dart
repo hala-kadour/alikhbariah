@@ -14,7 +14,7 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'features/bookmark/domain/entity/locale_post.dart';
+import '../features/bookmark/domain/entity/locale_post.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 

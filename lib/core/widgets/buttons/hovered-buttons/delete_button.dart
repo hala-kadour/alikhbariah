@@ -1,6 +1,6 @@
 import 'package:alikhbariah/config/theme/app_icons.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:alikhbariah/generated/locale_keys.g.dart';
+import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/scales/sizes_config.dart';

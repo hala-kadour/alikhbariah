@@ -4,7 +4,7 @@ import 'package:alikhbariah/features/home/presentation/widgets/latest_posts_view
 import 'package:alikhbariah/features/home/presentation/widgets/section_title.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/video_categories_view.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:alikhbariah/generated/locale_keys.g.dart';
+import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

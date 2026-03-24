@@ -1,7 +1,7 @@
 import 'package:alikhbariah/config/router/app_route_config.dart';
 import 'package:alikhbariah/features/home/data/models/video/video_category_model.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:alikhbariah/generated/locale_keys.g.dart';
+import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

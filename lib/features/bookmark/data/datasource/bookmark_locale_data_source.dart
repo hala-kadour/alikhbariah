@@ -1,5 +1,5 @@
 import '../../../../core/services/object_box_service.dart';
-import '../../../../objectbox.g.dart';
+import '../../../../generated/objectbox.g.dart';
 import '../../domain/entity/locale_post.dart';
 
 abstract class BookmarkLocaleDataSource {

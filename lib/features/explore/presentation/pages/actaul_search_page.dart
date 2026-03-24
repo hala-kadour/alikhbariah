@@ -1,7 +1,7 @@
 import 'package:alikhbariah/features/home/presentation/widgets/loading_news_cards.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/news_card.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:alikhbariah/generated/locale_keys.g.dart';
+import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
