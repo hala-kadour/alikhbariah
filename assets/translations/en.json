@@ -10,6 +10,11 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "moments_ago": "Moments ago",
+    "time_hours_ago": "{} hours ago",
+    "time_days_ago": "{} days ago",
+    "time_weeks_ago": "{} weeks ago",
+    "time_months_ago": "{} months ago",
+    "time_years_ago": "{} years ago",
     "loading": "Loading...",
     "latest_news": "Latest Posts",
     "no_videos": "No videos available in this category",
@@ -44,6 +49,8 @@
     "view_all": "View all",
     "language": "Language",
     "notification": "Notification",
+    "views_count": "{} views",
+    "news_count": "{} News",
     "search_placeholder": "Search title, summary, location...",
     "recent_search": "Recent search",
     "save_in_collection": "Save in a collection",
@@ -51,5 +58,8 @@
     "news_videos": "News Videos",
     "no_saved_news": "No saved news found",
     "close": "Close",
-    "programs": "Programs"
+    "programs": "Programs",
+    "saved_successfully": "Saved successfully",
+    "save_failed": "Save failed",
+    "live_stream": "Live Stream"
 }

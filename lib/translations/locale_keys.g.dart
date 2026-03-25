@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const theme = 'theme';
   static const select_theme = 'select_theme';
   static const choose_language = 'choose_language';
@@ -14,6 +14,11 @@ abstract class  LocaleKeys {
   static const cancel = 'cancel';
   static const delete = 'delete';
   static const moments_ago = 'moments_ago';
+  static const time_hours_ago = 'time_hours_ago';
+  static const time_days_ago = 'time_days_ago';
+  static const time_weeks_ago = 'time_weeks_ago';
+  static const time_months_ago = 'time_months_ago';
+  static const time_years_ago = 'time_years_ago';
   static const loading = 'loading';
   static const latest_news = 'latest_news';
   static const no_videos = 'no_videos';
@@ -48,6 +53,8 @@ abstract class  LocaleKeys {
   static const view_all = 'view_all';
   static const language = 'language';
   static const notification = 'notification';
+  static const views_count = 'views_count';
+  static const news_count = 'news_count';
   static const search_placeholder = 'search_placeholder';
   static const recent_search = 'recent_search';
   static const save_in_collection = 'save_in_collection';
@@ -56,5 +63,7 @@ abstract class  LocaleKeys {
   static const no_saved_news = 'no_saved_news';
   static const close = 'close';
   static const programs = 'programs';
-
+  static const saved_successfully = 'saved_successfully';
+  static const save_failed = 'save_failed';
+  static const live_stream = 'live_stream';
 }

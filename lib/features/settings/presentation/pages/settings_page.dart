@@ -151,14 +151,14 @@ class SettingsPage extends ConsumerWidget {
             ListTile(
               title: const Text("العربية 🇸🇦"),
               onTap: () {
-                context.setLocale(const Locale('ar', 'SA'));
+                context.setLocale(const Locale('ar'));
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: const Text("English 🇺🇸"),
               onTap: () {
-                context.setLocale(const Locale('en', 'US'));
+                context.setLocale(const Locale('en'));
                 Navigator.pop(context);
               },
             ),

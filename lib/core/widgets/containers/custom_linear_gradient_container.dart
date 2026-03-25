@@ -10,14 +10,17 @@ class CustomLinearGradientContainer extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadiusDirectional.only(
+          topEnd: Radius.circular(16.0),
+          bottomStart: Radius.circular(16.0),
+        ),
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
             Colors.transparent,
             AppColors.secondary700.withAlpha(100),
-            AppColors.secondary700,
+            AppColors.secondary800,
           ],
         ),
       ),

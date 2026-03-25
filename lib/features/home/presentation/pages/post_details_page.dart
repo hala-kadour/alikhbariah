@@ -73,7 +73,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                   Gap.w16,
                   Text(
                     "|    ${TimeFormatter.timeAgo(widget.post.createdAt!)}",
-                    style: AppTextStyles.labelSmall(),
+                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
                   ),
                 ],
               ),
@@ -93,16 +95,33 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
               Row(
                 spacing: 4.0,
                 children: [
+                  Icon(AppIcons.calendarLight),
+                  Text(
+                    DateFormat(
+                      'd MMMM yyyy',
+                      context.locale.toString(),
+                    ).format(widget.post.createdAt!),
+                    style: AppTextStyles.labelSmall(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  Gap.w16,
                   Icon(AppIcons.showLight),
                   Text(
-                    "${widget.post.viewsCount} views",
-                    style: AppTextStyles.labelSmall(),
+                    LocaleKeys.views_count.tr(
+                      args: [widget.post.viewsCount.toString()],
+                    ),
+                    style: AppTextStyles.labelSmall(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   Gap.w16,
                   Icon(AppIcons.locationLight),
                   Text(
                     widget.post.location ?? "",
-                    style: AppTextStyles.labelSmall(),
+                    style: AppTextStyles.labelSmall(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),

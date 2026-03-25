@@ -35,6 +35,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'features/bookmark/data/datasource/bookmark_locale_data_source.dart';
 import 'features/bookmark/data/repository/bookmark_repository_impl.dart';
 import 'features/bookmark/domain/repository/bookmark_repository.dart';
+import 'features/explore/domain/usecases/get_popular_tags_use_case.dart';
 import 'features/home/data/repository/home_repository_impl.dart';
 import 'features/home/domain/repository/home_repository.dart';
 import 'features/home/domain/usecases/get_latest_posts_use_case.dart';
@@ -102,6 +103,7 @@ void _initExploreFeature() {
   sl.registerLazySingleton(() => GetActiveCategoriesUseCase(sl()));
   sl.registerLazySingleton(() => GetCategoryPostsUseCase(sl()));
   sl.registerLazySingleton(() => GetTagPostsUseCase(sl()));
+  sl.registerLazySingleton(() => GetPopularTagsUseCase(sl()));
   sl.registerLazySingleton(() => GetPostTagsUseCase(sl()));
   sl.registerLazySingleton(() => GetSearchedPostsUseCase(sl()));
 }

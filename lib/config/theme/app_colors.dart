@@ -163,7 +163,7 @@ class AppColors {
   //==================== For The Light Mode ==============================//
 
   static const textHeadingsLight = secondary800;
-  static const textBodyLight = secondary300;
+  static const textBodyLight = secondaryDefault;
   static const textLabelLight = neutral300;
   static const textActionLight = primaryDefault;
   static const textOnActionLight = white;

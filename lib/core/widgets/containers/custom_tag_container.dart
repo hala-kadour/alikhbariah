@@ -19,7 +19,7 @@ class CustomTagContainer extends StatelessWidget {
         ),
         child: Text(
           "#${tag.name}",
-          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+          style: Theme.of(context).textTheme.labelMedium!.copyWith(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),

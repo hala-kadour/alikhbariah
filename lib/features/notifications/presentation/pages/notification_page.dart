@@ -1,4 +1,6 @@
+import 'package:alikhbariah/features/notifications/data/models/app_notification_model.dart';
 import 'package:alikhbariah/features/notifications/presentation/providers/notification_provider.dart';
+import 'package:alikhbariah/features/notifications/presentation/widgets/notification_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +21,30 @@ class NotificationPage extends StatelessWidget {
           builder: (context, ref, child) {
             var notificationList = ref.watch(allNotificationProvider);
             return notificationList.when(
-              data: (data) => Text("Data"),
-              error: (error, stackTrace) => Text("Error : $error"),
-              loading: () => Text("Loading"),
+              data: (data) {
+                if (data.isEmpty) {
+                  return Center(
+                    child: Text(
+                      LocaleKeys.no_data.tr(),
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  );
+                }
+
+                return ListView.separated(
+                  padding: const EdgeInsets.only(bottom: 16, top: 12),
+                  itemCount: data.length,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 4),
+                  itemBuilder: (context, index) {
+                    final AppNotificationModel notification = data[index];
+                    return NotificationCard(notification: notification);
+                  },
+                );
+              },
+              error: (error, stackTrace) =>
+                  Center(child: Text("Error: $error")),
+              loading: () => const Center(child: CircularProgressIndicator()),
             );
           },
         ),

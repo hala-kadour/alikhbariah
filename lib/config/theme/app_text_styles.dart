@@ -336,11 +336,125 @@ class AppTextStyles {
   static TextStyle buttonSecondary({Color? color}) {
     return TextStyle(
       color: color ?? AppColors.textOnActionLight,
-      fontSize: 14,
+      fontSize: 12,
       fontFamily: AppFonts.mainAppFont,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w700,
       letterSpacing: 0,
       height: 1.43,
+    );
+  }
+
+  // Additional Custom Styles
+  static TextStyle errorText({
+    Color? color,
+    FontWeight weight = FontWeight.w500,
+  }) {
+    return TextStyle(
+      color: color ?? AppColors.errorDefault,
+      fontSize: 14,
+      fontFamily: AppFonts.mainAppFont,
+      fontWeight: weight,
+      letterSpacing: 0.5,
+      height: 1.43,
+    );
+  }
+
+  static TextStyle successText({
+    Color? color,
+    FontWeight weight = FontWeight.w500,
+  }) {
+    return TextStyle(
+      color: color ?? AppColors.successDefault,
+      fontSize: 14,
+      fontFamily: AppFonts.mainAppFont,
+      fontWeight: weight,
+      letterSpacing: 0.5,
+      height: 1.43,
+    );
+  }
+
+  static TextStyle warningText({
+    Color? color,
+    FontWeight weight = FontWeight.w500,
+  }) {
+    return TextStyle(
+      color: color ?? AppColors.warningDefault,
+      fontSize: 14,
+      fontFamily: AppFonts.mainAppFont,
+      fontWeight: weight,
+      letterSpacing: 0.5,
+      height: 1.43,
+    );
+  }
+
+  static TextStyle linkText({
+    Color? color,
+    FontWeight weight = FontWeight.w500,
+  }) {
+    return TextStyle(
+      color: color ?? AppColors.primaryDefault,
+      fontSize: 14,
+      fontFamily: AppFonts.mainAppFont,
+      fontWeight: weight,
+      letterSpacing: 0.5,
+      height: 1.43,
+      decoration: TextDecoration.underline,
+    );
+  }
+
+  static TextStyle subtitle({
+    Color? color,
+    FontWeight weight = FontWeight.w400,
+  }) {
+    return TextStyle(
+      color: color ?? AppColors.textBodyLight,
+      fontSize: 16,
+      fontFamily: AppFonts.mainAppFont,
+      fontWeight: weight,
+      letterSpacing: 0.5,
+      height: 1.5,
+    );
+  }
+
+  static TextStyle caption({
+    Color? color,
+    FontWeight weight = FontWeight.w400,
+  }) {
+    return TextStyle(
+      color: color ?? AppColors.textBodyLight,
+      fontSize: 12,
+      fontFamily: AppFonts.mainAppFont,
+      fontWeight: weight,
+      letterSpacing: 0.5,
+      height: 1.33,
+    );
+  }
+
+  static TextStyle buttonText({
+    Color? color,
+    FontWeight weight = FontWeight.w500,
+  }) {
+    return TextStyle(
+      color: color ?? AppColors.textLabelLight,
+      fontSize: 14,
+      fontFamily: AppFonts.mainAppFont,
+      fontWeight: weight,
+      letterSpacing: 0.5,
+      height: 1.43,
+    );
+  }
+
+  static TextStyle overline({
+    Color? color,
+    FontWeight weight = FontWeight.w500,
+  }) {
+    return TextStyle(
+      color: color ?? AppColors.textLabelLight,
+      fontSize: 10,
+      fontFamily: AppFonts.mainAppFont,
+      fontWeight: weight,
+      letterSpacing: 1.5,
+      height: 1.6,
     );
   }
 }

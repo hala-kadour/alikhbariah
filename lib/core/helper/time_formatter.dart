@@ -15,24 +15,26 @@ class TimeFormatter {
     }
 
     if (difference.inHours < 24) {
-      return "${difference.inHours} Hours ago";
+      return LocaleKeys.time_hours_ago.tr(
+        args: [difference.inHours.toString()],
+      );
     }
 
     if (difference.inDays < 7) {
-      return "${difference.inDays} Days ago";
+      return LocaleKeys.time_days_ago.tr(args: [difference.inDays.toString()]);
     }
 
     if (difference.inDays < 30) {
       final weeks = (difference.inDays / 7).floor();
-      return "$weeks Weeks ago";
+      return LocaleKeys.time_weeks_ago.tr(args: [weeks.toString()]);
     }
 
     if (difference.inDays < 365) {
       final months = (difference.inDays / 30).floor();
-      return "$months Months ago";
+      return LocaleKeys.time_months_ago.tr(args: [months.toString()]);
     }
 
     final years = (difference.inDays / 365).floor();
-    return "$years years ago";
+    return LocaleKeys.time_years_ago.tr(args: [years.toString()]);
   }
 }

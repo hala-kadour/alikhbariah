@@ -43,7 +43,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
 
     return Scaffold(
       appBar: MainBackAppBar(
-        title: collection.name,
+        title: collection.name.tr(),
         action: PopupMenuButton(
           itemBuilder: (context) => [
             PopupMenuItem(

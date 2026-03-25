@@ -22,7 +22,6 @@ class BookmarkIconButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // مراقبة حالة الحفظ
     final isSaved = ref.watch(isSavedProvider(post.id));
 
     return IconButton(
@@ -97,6 +96,7 @@ class BookmarkIconButton extends ConsumerWidget {
               padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: .start,
                 children: [
                   Text(
                     LocaleKeys.save_in_collection.tr(),
@@ -104,19 +104,27 @@ class BookmarkIconButton extends ConsumerWidget {
                   ),
                   Gap.h16,
                   ...collections.map(
-                    (collection) => ListTile(
-                      leading: const Icon(AppIcons.folderLight),
-                      title: Text(
-                        collection.name,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                    (collection) => InkWell(
+                      child: ListTile(
+                        leading: const Icon(AppIcons.folderLight),
+                        title: Text(
+                          collection.name.tr(),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        onTap: () async {
+                          await ref
+                              .read(bookmarkNotifierProvider.notifier)
+                              .savePost(
+                                post: post,
+                                collectionId: collection.id,
+                              );
+                          if (!context.mounted) return;
+                          context.pop();
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            ref.invalidate(isSavedProvider(post.id));
+                          });
+                        },
                       ),
-                      onTap: () async {
-                        await ref
-                            .read(bookmarkNotifierProvider.notifier)
-                            .savePost(post: post, collectionId: collection.id);
-                        if (!context.mounted) return;
-                        context.pop();
-                      },
                     ),
                   ),
                 ],

@@ -32,7 +32,9 @@ class BreakingNewsIndicators extends StatelessWidget {
                 color: isActive
                     ? Theme.of(context).colorScheme.primary
                     : Theme.of(context).colorScheme.secondary,
-                borderRadius: BorderRadius.circular(2.0),
+                borderRadius: BorderRadiusDirectional.only(
+                  topEnd: Radius.circular(12.0),
+                ),
               ),
               alignment: Alignment.center,
               child: Text(
@@ -41,7 +43,7 @@ class BreakingNewsIndicators extends StatelessWidget {
                   color: isActive
                       ? Theme.of(context).colorScheme.secondary
                       : Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                  fontWeight: FontWeight.bold,
                   fontSize: 14,
                 ),
               ),

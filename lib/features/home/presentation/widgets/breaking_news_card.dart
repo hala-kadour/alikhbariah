@@ -1,4 +1,5 @@
 import 'package:alikhbariah/config/router/app_route_config.dart';
+import 'package:alikhbariah/config/theme/app_colors.dart';
 import 'package:alikhbariah/core/widgets/containers/custom_category_name_container.dart';
 import 'package:alikhbariah/features/bookmark/presentation/widgets/bookmark_icon_button.dart';
 import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
@@ -35,7 +36,10 @@ class BreakingNewsCard extends StatelessWidget {
             image: NetworkImage(post.imageUrl ?? ""),
             fit: BoxFit.cover,
           ),
-          borderRadius: BorderRadiusDirectional.circular(8.0),
+          borderRadius: BorderRadiusDirectional.only(
+            topEnd: Radius.circular(24.0),
+            bottomStart: Radius.circular(24.0),
+          ),
         ),
         child: CustomLinearGradientContainer(
           child: Column(
@@ -54,9 +58,11 @@ class BreakingNewsCard extends StatelessWidget {
                       Gap.w16,
                       Text(
                         "|    ${TimeFormatter.timeAgo(post.createdAt!)}",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.labelSmall!.copyWith(color: Colors.white),
+                        style: Theme.of(context).textTheme.labelMedium!
+                            .copyWith(
+                              color: AppColors.white,
+                              fontWeight: .w700,
+                            ),
                       ),
                     ],
                   ),
@@ -68,16 +74,14 @@ class BreakingNewsCard extends StatelessWidget {
                 post.title,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: Colors.white,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               Gap.h24,
-              // استبدل الجزء الموجود في الأسفل بهذا
               Center(
                 child: BreakingNewsIndicators(
                   controller: pageController,
-                  itemCount:
-                      length, // يمكنك تمرير طول القائمة الفعلي هنا data.length
+                  itemCount: length,
                 ),
               ),
               Gap.h8,
