@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:alikhbariah/translations/locale_keys.g.dart';
 
 import '../../../config/constant/assets_path.dart';
 import '../../../config/scales/gap.dart';
 
 class EmptyStatusAnimation extends StatelessWidget {
-  const EmptyStatusAnimation({super.key});
+  const EmptyStatusAnimation({super.key, required this.title});
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class EmptyStatusAnimation extends StatelessWidget {
         ),
         Gap.w16,
         Text(
-          LocaleKeys.no_data.tr(),
+          title,
           style: Theme.of(context).textTheme.labelSmall!.copyWith(
             color: Theme.of(context).primaryColor,
           ),

@@ -32,14 +32,14 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   SectionTitle(
-                    title: LocaleKeys.breaking_news.tr(),
+                    title: LocaleKeys.news_breaking.tr(),
                     onPressed: () =>
                         context.pushNamed(AppRouteConfig.breakingNews),
                   ),
                   BreakingNewsPageView(),
                   Gap.h16,
                   SectionTitle(
-                    title: LocaleKeys.latest_news.tr(),
+                    title: LocaleKeys.news_latest.tr(),
                     onPressed: () =>
                         context.pushNamed(AppRouteConfig.latestPosts),
                   ),
@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   VideoCategoriesView(type: "news_video"),
                   SectionTitle(
-                    title: LocaleKeys.programs.tr(),
+                    title: LocaleKeys.news_programs.tr(),
                     onPressed: () => context.pushNamed(
                       AppRouteConfig.videosCategories,
                       extra: "program",

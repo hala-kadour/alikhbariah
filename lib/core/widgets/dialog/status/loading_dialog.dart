@@ -31,7 +31,7 @@ void showLoadingDialog(BuildContext context) {
               ),
               Gap.h16,
               Text(
-                LocaleKeys.loading.tr(),
+                LocaleKeys.common_loading.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ],

@@ -31,7 +31,7 @@ class LiveStreamButton extends StatelessWidget {
           }
         },
         label: Text(
-          LocaleKeys.live_stream.tr(),
+          LocaleKeys.news_live_stream.tr(),
           style: Theme.of(context).textTheme.labelSmall!.copyWith(
             color: Theme.of(context).colorScheme.onPrimary,
             fontWeight: .w700,

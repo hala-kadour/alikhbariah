@@ -3,6 +3,8 @@ import 'package:alikhbariah/core/widgets/animation/empty_status_animation.dart';
 import 'package:alikhbariah/core/widgets/animation/error_status_animation.dart';
 import 'package:alikhbariah/features/home/presentation/providers/home_providers.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/breaking_news_card.dart';
+import 'package:alikhbariah/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -50,7 +52,9 @@ class _BreakingNewsPageViewState extends State<BreakingNewsPageView> {
         var posts = ref.watch(breakingPostsProvider);
         return posts.when(
           data: (data) {
-            if (data.isEmpty) return const EmptyStatusAnimation();
+            if (data.isEmpty) {
+              return EmptyStatusAnimation(title: LocaleKeys.empty_no_news.tr());
+            }
 
             return SizedBox(
               width: double.infinity,

@@ -39,7 +39,7 @@ class CollectionCard extends StatelessWidget {
               ),
               Gap.h4,
               Text(
-                LocaleKeys.news_count.tr(
+                LocaleKeys.news_news_count.tr(
                   args: [collection.posts.length.toString()],
                 ),
                 style: Theme.of(context).textTheme.bodySmall,

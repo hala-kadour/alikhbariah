@@ -1,6 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:alikhbariah/translations/locale_keys.g.dart';
-
 abstract class Failure {
   final String message;
   const Failure(this.message);
@@ -11,7 +8,7 @@ class ServerFailure extends Failure {
 }
 
 class NetworkFailure extends Failure {
-  NetworkFailure() : super(LocaleKeys.check_connection.tr());
+  NetworkFailure(super.message);
 }
 
 class CacheFailure extends Failure {
@@ -19,5 +16,5 @@ class CacheFailure extends Failure {
 }
 
 class UnknownFailure extends Failure {
-  UnknownFailure() : super(LocaleKeys.something_wrong.tr());
+  UnknownFailure(super.message);
 }

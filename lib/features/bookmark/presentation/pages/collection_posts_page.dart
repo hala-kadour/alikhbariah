@@ -51,7 +51,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
                 spacing: 8.0,
                 children: [
                   Icon(AppIcons.editSquareLight),
-                  Text(LocaleKeys.edit.tr()),
+                  Text(LocaleKeys.common_edit.tr()),
                 ],
               ),
             ),
@@ -62,7 +62,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
                 children: [
                   Icon(AppIcons.deleteLight, color: AppColors.errorDefault),
                   Text(
-                    LocaleKeys.delete.tr(),
+                    LocaleKeys.common_delete.tr(),
                     style: TextStyle(color: AppColors.errorDefault),
                   ),
                 ],
@@ -113,7 +113,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
           Lottie.asset(AnimationsPath.noData, width: 200),
           const SizedBox(height: 16),
           Text(
-            LocaleKeys.no_saved_news.tr(),
+            LocaleKeys.empty_no_saved_news.tr(),
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],

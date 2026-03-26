@@ -84,7 +84,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     _setFirst();
                     context.pushReplacementNamed(AppRouteConfig.home);
                   },
-                  child: Text(LocaleKeys.skip.tr()),
+                  child: Text(LocaleKeys.common_skip.tr()),
                 ),
               ],
             ),
@@ -156,7 +156,10 @@ class _OnBoardingItem extends StatelessWidget {
                 ),
               ),
               Gap.h24,
-              MainElevatedButton(onTap: onNext, title: LocaleKeys.next.tr()),
+              MainElevatedButton(
+                onTap: onNext,
+                title: LocaleKeys.common_next.tr(),
+              ),
             ],
           ),
         ),

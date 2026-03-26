@@ -7,11 +7,11 @@ class TimeFormatter {
     final difference = now.difference(dateTime);
 
     if (difference.inSeconds < 60) {
-      return LocaleKeys.moments_ago.tr();
+      return LocaleKeys.time_moments_ago.tr();
     }
 
     if (difference.inMinutes < 60) {
-      return LocaleKeys.moments_ago.tr();
+      return LocaleKeys.time_moments_ago.tr();
     }
 
     if (difference.inHours < 24) {

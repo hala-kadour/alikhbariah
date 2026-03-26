@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../config/constant/assets_path.dart';
 import '../../../../config/scales/gap.dart';
 import '../../../../config/scales/sizes_config.dart';
 
-void showSuccessDialog(BuildContext context, void Function()? onPressed) {
+void showSuccessDialog(
+  BuildContext context,
+  String title,
+  void Function()? onPressed,
+) {
   showDialog(
     context: context,
     barrierDismissible: false,
@@ -31,10 +33,7 @@ void showSuccessDialog(BuildContext context, void Function()? onPressed) {
                 repeat: true,
               ),
               Gap.h16,
-              Text(
-                LocaleKeys.success.tr(),
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
+              Text(title, style: Theme.of(context).textTheme.labelLarge),
               Gap.h24,
               SizedBox(
                 width: double.infinity,

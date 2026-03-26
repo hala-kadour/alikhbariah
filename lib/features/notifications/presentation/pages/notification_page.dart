@@ -1,3 +1,4 @@
+import 'package:alikhbariah/core/widgets/animation/empty_status_animation.dart';
 import 'package:alikhbariah/features/notifications/data/models/app_notification_model.dart';
 import 'package:alikhbariah/features/notifications/presentation/providers/notification_provider.dart';
 import 'package:alikhbariah/features/notifications/presentation/widgets/notification_card.dart';
@@ -14,7 +15,7 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainBackAppBar(title: LocaleKeys.notifications.tr()),
+      appBar: MainBackAppBar(title: LocaleKeys.navbar_notifications.tr()),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Consumer(
@@ -23,11 +24,8 @@ class NotificationPage extends StatelessWidget {
             return notificationList.when(
               data: (data) {
                 if (data.isEmpty) {
-                  return Center(
-                    child: Text(
-                      LocaleKeys.no_data.tr(),
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
+                  return EmptyStatusAnimation(
+                    title: LocaleKeys.empty_no_notifications.tr(),
                   );
                 }
 

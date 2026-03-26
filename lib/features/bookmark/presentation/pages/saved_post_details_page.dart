@@ -15,7 +15,7 @@ class SavedPostDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainBackAppBar(title: LocaleKeys.post_details.tr()),
+      appBar: MainBackAppBar(title: LocaleKeys.news_post_details.tr()),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: SingleChildScrollView(

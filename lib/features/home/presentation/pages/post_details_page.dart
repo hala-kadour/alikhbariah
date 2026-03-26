@@ -54,7 +54,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainBackAppBar(
-        title: LocaleKeys.post_details.tr(),
+        title: LocaleKeys.news_post_details.tr(),
         action: BookmarkIconButton(post: widget.post),
       ),
       body: Padding(
@@ -108,7 +108,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                   Gap.w16,
                   Icon(AppIcons.showLight),
                   Text(
-                    LocaleKeys.views_count.tr(
+                    LocaleKeys.news_views_count.tr(
                       args: [widget.post.viewsCount.toString()],
                     ),
                     style: AppTextStyles.labelSmall(
@@ -155,7 +155,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
               ),
               Gap.h16,
               Text(
-                LocaleKeys.related_posts.tr(),
+                LocaleKeys.news_related_posts.tr(),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Gap.h16,

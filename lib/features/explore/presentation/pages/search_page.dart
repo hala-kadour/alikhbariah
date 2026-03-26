@@ -42,14 +42,14 @@ class SearchPage extends StatelessWidget {
               mainAxisAlignment: .spaceBetween,
               children: [
                 Text(
-                  LocaleKeys.recent_search.tr(),
+                  LocaleKeys.search_recent.tr(),
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 Consumer(
                   builder: (context, ref, child) => TextButton(
                     onPressed: () =>
                         ref.watch(recentSearchProvider.notifier).clearAll(),
-                    child: Text(LocaleKeys.clear_all.tr()),
+                    child: Text(LocaleKeys.common_clear_all.tr()),
                   ),
                 ),
               ],
@@ -96,7 +96,7 @@ class SearchPage extends StatelessWidget {
             ),
             Gap.h24,
             Text(
-              LocaleKeys.popular_tags.tr(),
+              LocaleKeys.news_popular_tags.tr(),
               style: Theme.of(context).textTheme.titleSmall,
             ),
             Gap.h16,

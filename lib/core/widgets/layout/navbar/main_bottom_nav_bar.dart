@@ -36,13 +36,19 @@ class MainBottomNavBar extends StatelessWidget {
           ),
           padding: EdgeInsetsGeometry.all(12.0),
           tabs: [
-            GButton(icon: AppIcons.homeBold, text: LocaleKeys.home.tr()),
-            GButton(icon: AppIcons.searchBold, text: LocaleKeys.explore.tr()),
+            GButton(icon: AppIcons.homeBold, text: LocaleKeys.navbar_home.tr()),
+            GButton(
+              icon: AppIcons.searchBold,
+              text: LocaleKeys.navbar_explore.tr(),
+            ),
             GButton(
               icon: AppIcons.bookmarkBold,
-              text: LocaleKeys.bookmark.tr(),
+              text: LocaleKeys.navbar_bookmark.tr(),
             ),
-            GButton(icon: AppIcons.settingBold, text: LocaleKeys.settings.tr()),
+            GButton(
+              icon: AppIcons.settingBold,
+              text: LocaleKeys.common_settings.tr(),
+            ),
           ],
         ),
       ),

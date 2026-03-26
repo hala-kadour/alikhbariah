@@ -52,12 +52,20 @@ class BookmarkIconButton extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(LocaleKeys.cancel.tr()),
-        content: Text(LocaleKeys.delete_item_confirm.tr(), textAlign: .center),
+        title: Text(LocaleKeys.common_cancel.tr()),
+        content: Text(
+          LocaleKeys.dialogs_delete_item_confirm.tr(),
+          textAlign: .center,
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(LocaleKeys.cancel.tr()),
+            child: Text(
+              LocaleKeys.common_cancel.tr(),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
           ),
           TextButton(
             onPressed: () {
@@ -68,7 +76,7 @@ class BookmarkIconButton extends ConsumerWidget {
               ref.invalidate(isSavedProvider(post.id));
             },
             child: Text(
-              LocaleKeys.delete.tr(),
+              LocaleKeys.common_delete.tr(),
               style: TextStyle(color: Colors.red),
             ),
           ),
@@ -99,7 +107,7 @@ class BookmarkIconButton extends ConsumerWidget {
                 crossAxisAlignment: .start,
                 children: [
                   Text(
-                    LocaleKeys.save_in_collection.tr(),
+                    LocaleKeys.news_save_in_collection.tr(),
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Gap.h16,

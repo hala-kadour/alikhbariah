@@ -23,8 +23,8 @@ class ObjectBoxService {
   void _prepareDefaultCollections() {
     if (collectionBox.isEmpty()) {
       collectionBox.putMany([
-        LocalCollection(name: LocaleKeys.read_later.tr()),
-        LocalCollection(name: LocaleKeys.favorite.tr()),
+        LocalCollection(name: LocaleKeys.news_read_later.tr()),
+        LocalCollection(name: LocaleKeys.news_favorite.tr()),
       ]);
     }
   }

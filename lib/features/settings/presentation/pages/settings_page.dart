@@ -16,7 +16,7 @@ class SettingsPage extends ConsumerWidget {
     final isDarkMode = themeMode.value == ThemeMode.dark;
 
     return Scaffold(
-      appBar: AppBar(title: Text(LocaleKeys.settings.tr())),
+      appBar: AppBar(title: Text(LocaleKeys.common_settings.tr())),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -24,7 +24,7 @@ class SettingsPage extends ConsumerWidget {
           children: [
             Gap.h32,
             Text(
-              LocaleKeys.general.tr(),
+              LocaleKeys.common_general.tr(),
               style: Theme.of(context).textTheme.bodySmall,
             ),
             Gap.h16,
@@ -40,7 +40,7 @@ class SettingsPage extends ConsumerWidget {
                   _buildSettingRow(
                     context,
                     icon: Icons.notifications_none,
-                    title: LocaleKeys.notification.tr(),
+                    title: LocaleKeys.navbar_notifications.tr(),
                     trailing: Switch.adaptive(
                       value: true, // هنا نربطها ببروفايدر الإشعارات لاحقاً
                       onChanged: (value) {
@@ -54,7 +54,7 @@ class SettingsPage extends ConsumerWidget {
                   _buildSettingRow(
                     context,
                     icon: Icons.language,
-                    title: LocaleKeys.language.tr(),
+                    title: LocaleKeys.common_language.tr(),
                     onTap: () => _showLanguageDialog(context),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -81,15 +81,15 @@ class SettingsPage extends ConsumerWidget {
                   _buildSettingRow(
                     context,
                     icon: Icons.color_lens_outlined,
-                    title: LocaleKeys.theme.tr(),
+                    title: LocaleKeys.common_theme.tr(),
                     onTap: () => _showThemeDialog(context, ref),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           isDarkMode
-                              ? LocaleKeys.dark_mode.tr()
-                              : LocaleKeys.light_mode.tr(),
+                              ? LocaleKeys.common_dark_mode.tr()
+                              : LocaleKeys.common_light_mode.tr(),
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         Icon(
@@ -144,7 +144,7 @@ class SettingsPage extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(LocaleKeys.choose_language.tr()),
+        title: Text(LocaleKeys.common_choose_language.tr()),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -173,13 +173,13 @@ class SettingsPage extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(LocaleKeys.select_theme.tr()),
+        title: Text(LocaleKeys.common_select_theme.tr()),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
               leading: const Icon(Icons.wb_sunny_outlined),
-              title: Text(LocaleKeys.light_mode.tr()),
+              title: Text(LocaleKeys.common_light_mode.tr()),
               onTap: () {
                 ref
                     .read(themeNotifierProvider.notifier)
@@ -189,7 +189,7 @@ class SettingsPage extends ConsumerWidget {
             ),
             ListTile(
               leading: const Icon(Icons.dark_mode_outlined),
-              title: Text(LocaleKeys.dark_mode.tr()),
+              title: Text(LocaleKeys.common_dark_mode.tr()),
               onTap: () {
                 ref
                     .read(themeNotifierProvider.notifier)

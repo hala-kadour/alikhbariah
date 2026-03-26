@@ -27,7 +27,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              LocaleKeys.add_bookmark.tr(),
+              LocaleKeys.news_add_bookmark.tr(),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 20),
@@ -37,7 +37,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                 filled: true,
                 fillColor: Theme.of(context).colorScheme.surfaceBright,
                 hoverColor: Theme.of(context).colorScheme.surfaceBright,
-                hintText: LocaleKeys.title.tr(),
+                hintText: LocaleKeys.common_title.tr(),
                 prefixIcon: const Icon(AppIcons.bookmarkLight),
               ),
             ),
@@ -48,7 +48,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                   child: TextButton(
                     onPressed: () => Navigator.pop(context),
                     child: Text(
-                      LocaleKeys.cancel.tr(),
+                      LocaleKeys.common_cancel.tr(),
                       style: AppTextStyles.buttonSecondary(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
@@ -67,7 +67,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                             Navigator.pop(context);
                           }
                         },
-                        child: Text(LocaleKeys.save.tr()),
+                        child: Text(LocaleKeys.common_save.tr()),
                       );
                     },
                   ),

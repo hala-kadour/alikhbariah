@@ -19,7 +19,7 @@ class VideosCategoriesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           type.contains('program')
-              ? LocaleKeys.programs.tr()
+              ? LocaleKeys.news_programs.tr()
               : LocaleKeys.news_videos.tr(),
         ),
       ),
@@ -37,7 +37,9 @@ class VideosCategoriesPage extends StatelessWidget {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 if (data.isEmpty) {
-                  return EmptyStatusAnimation();
+                  return EmptyStatusAnimation(
+                    title: LocaleKeys.empty_no_categories.tr(),
+                  );
                 } else {
                   return VideoCategoryCard(category: data[index]);
                 }

@@ -35,7 +35,7 @@ class SectionTitle extends StatelessWidget {
           ),
           TextButton(
             onPressed: onPressed,
-            child: Text(LocaleKeys.view_all.tr()),
+            child: Text(LocaleKeys.common_view_all.tr()),
           ),
         ],
       ),

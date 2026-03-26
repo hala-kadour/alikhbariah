@@ -97,7 +97,7 @@ class NewsCard extends StatelessWidget {
                     children: [
                       Icon(AppIcons.showLight, size: 18.0),
                       Text(
-                        LocaleKeys.views_count.tr(
+                        LocaleKeys.news_views_count.tr(
                           args: [post.viewsCount.toString()],
                         ),
                         style: AppTextStyles.labelSmall(

@@ -1,3 +1,4 @@
+import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class BreakingNewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(LocaleKeys.breaking_news.tr())),
+      appBar: MainBackAppBar(title: LocaleKeys.news_breaking.tr()),
       body: Consumer(
         builder: (context, ref, child) {
           final posts = ref.watch(breakingPostsProvider);
@@ -26,7 +27,9 @@ class BreakingNewsPage extends StatelessWidget {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 if (data.isEmpty) {
-                  return EmptyStatusAnimation();
+                  return EmptyStatusAnimation(
+                    title: LocaleKeys.empty_no_news.tr(),
+                  );
                 } else {
                   return NewsCard(post: data[index]);
                 }

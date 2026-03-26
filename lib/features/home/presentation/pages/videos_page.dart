@@ -1,4 +1,5 @@
 import 'package:alikhbariah/config/router/app_route_config.dart';
+import 'package:alikhbariah/core/widgets/animation/empty_status_animation.dart';
 import 'package:alikhbariah/features/home/data/models/video/video_category_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
@@ -22,7 +23,7 @@ class VideosPage extends ConsumerWidget {
       body: videosAsync.when(
         data: (videos) {
           if (videos.isEmpty) {
-            return Center(child: Text(LocaleKeys.no_videos.tr()));
+            return EmptyStatusAnimation(title: LocaleKeys.empty_no_videos.tr());
           }
           return ListView.builder(
             itemCount: videos.length,

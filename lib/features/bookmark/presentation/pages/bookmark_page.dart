@@ -18,14 +18,14 @@ class BookmarkPage extends ConsumerWidget {
     final collections = ref.watch(bookmarkNotifierProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(LocaleKeys.bookmark.tr())),
+      appBar: AppBar(title: Text(LocaleKeys.navbar_bookmark.tr())),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextFormField(
               decoration: InputDecoration(
-                hintText: LocaleKeys.search_news.tr(),
+                hintText: LocaleKeys.search_saved.tr(),
                 prefixIcon: Icon(AppIcons.searchLight),
                 suffixIcon: Icon(AppIcons.filterLight),
               ),

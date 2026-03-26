@@ -1,5 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 Future<dynamic> confirmDeletionDialog(
@@ -11,7 +11,7 @@ Future<dynamic> confirmDeletionDialog(
     context: context,
     builder: (context) => AlertDialog(
       title: Text(
-        LocaleKeys.delete_item_confirm.tr(args: [deleteItemName]),
+        LocaleKeys.dialogs_delete_item_confirm.tr(args: [deleteItemName]),
         style: Theme.of(context).textTheme.labelLarge,
       ),
       actions: [

@@ -26,7 +26,7 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
     final categoriesAsync = ref.watch(categoriesProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(LocaleKeys.explore.tr())),
+      appBar: AppBar(title: Text(LocaleKeys.navbar_explore.tr())),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -38,7 +38,7 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
                 child: AbsorbPointer(
                   child: TextFormField(
                     decoration: InputDecoration(
-                      hintText: LocaleKeys.search_news.tr(),
+                      hintText: LocaleKeys.search_placeholder.tr(),
                       prefixIcon: Icon(AppIcons.searchLight),
                       suffixIcon: Icon(AppIcons.filterLight),
                     ),
@@ -51,7 +51,7 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
                 error: (e, _) => Text("Error: $e"),
                 data: (categories) {
                   final tabs = [
-                    Tab(text: LocaleKeys.all.tr()),
+                    Tab(text: LocaleKeys.common_all.tr()),
                     ...categories.map((c) => Tab(text: c.name)),
                   ];
                   return DefaultTabController(
