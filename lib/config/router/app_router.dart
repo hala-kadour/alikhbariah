@@ -6,7 +6,9 @@ import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:alikhbariah/features/home/data/models/tag/tag_model.dart';
 import 'package:alikhbariah/features/home/data/models/video/video_category_model.dart';
 import 'package:alikhbariah/features/home/presentation/pages/breaking_news_page.dart';
+import 'package:alikhbariah/features/home/presentation/pages/featured_posts_page.dart';
 import 'package:alikhbariah/features/home/presentation/pages/latest_posts_page.dart';
+import 'package:alikhbariah/features/home/presentation/pages/most_readed_posts_page.dart';
 import 'package:alikhbariah/features/home/presentation/pages/video_player_page.dart';
 import 'package:alikhbariah/features/home/presentation/pages/videos_categories_page.dart';
 import 'package:alikhbariah/features/home/presentation/pages/videos_page.dart';
@@ -99,6 +101,16 @@ final routerProvider = Provider<GoRouter>((ref) {
                     name: AppRouteConfig.latestPosts,
                     path: 'latest-posts',
                     builder: (context, state) => LatestPostsPage(),
+                  ),
+                  GoRoute(
+                    name: AppRouteConfig.featuredPosts,
+                    path: 'featured-posts',
+                    builder: (context, state) => FeaturedPostsPage(),
+                  ),
+                  GoRoute(
+                    name: AppRouteConfig.mostReadedPosts,
+                    path: 'most-readed-posts',
+                    builder: (context, state) => MostReadedPostsPage(),
                   ),
                   GoRoute(
                     name: AppRouteConfig.videosCategories,

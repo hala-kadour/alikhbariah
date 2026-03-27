@@ -7,6 +7,8 @@ class AppRouteConfig {
   static const home = 'home';
   static const breakingNews = 'breaking-news';
   static const latestPosts = 'latest-posts';
+  static const featuredPosts = 'featured-posts';
+  static const mostReadedPosts = 'most-readed-posts';
   static const videosCategories = 'videos-categories';
   static const videos = 'videos';
   static const videoPlayer = 'video-player';

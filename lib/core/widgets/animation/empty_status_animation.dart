@@ -21,8 +21,9 @@ class EmptyStatusAnimation extends StatelessWidget {
         Gap.w16,
         Text(
           title,
-          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+          style: Theme.of(context).textTheme.labelMedium!.copyWith(
             color: Theme.of(context).primaryColor,
+            fontWeight: .w600,
           ),
         ),
       ],

@@ -26,8 +26,9 @@ class ErrorStatusAnimation extends StatelessWidget {
         Gap.h8,
         Text(
           errorMessage,
-          style: Theme.of(context).textTheme.labelSmall!.copyWith(
-            color: Theme.of(context).primaryColor,
+          style: Theme.of(context).textTheme.labelMedium!.copyWith(
+            color: Theme.of(context).colorScheme.error,
+            fontWeight: .w600,
           ),
           textAlign: TextAlign.center,
           overflow: TextOverflow.fade,

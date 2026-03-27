@@ -1,6 +1,10 @@
+import 'package:alikhbariah/config/scales/gap.dart';
 import 'package:alikhbariah/core/helper/time_formatter.dart';
 import 'package:alikhbariah/features/notifications/data/models/app_notification_model.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../config/theme/app_colors.dart';
+import '../../../../config/theme/app_text_styles.dart';
 
 class NotificationCard extends StatelessWidget {
   final AppNotificationModel notification;
@@ -19,17 +23,24 @@ class NotificationCard extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       margin: const EdgeInsets.only(bottom: 16.0),
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: theme.inputDecorationTheme.fillColor,
         borderRadius: BorderRadius.circular(8.0),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).dividerColor,
+            blurRadius: 0.5,
+            offset: Offset(0, 1),
+          ),
+        ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 52,
-            height: 52,
+            width: 70,
+            height: 62,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: theme.colorScheme.primary.withValues(alpha: 0.12),
@@ -38,7 +49,10 @@ class NotificationCard extends StatelessWidget {
                 notification.imageUrl != null &&
                     notification.imageUrl!.isNotEmpty
                 ? ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadiusGeometry.directional(
+                      topEnd: Radius.circular(16.0),
+                      bottomStart: Radius.circular(16.0),
+                    ),
                     child: Image.network(
                       notification.imageUrl!,
                       fit: BoxFit.cover,
@@ -53,24 +67,29 @@ class NotificationCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  notification.title,
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Text(notification.body, style: theme.textTheme.bodyMedium),
-                if (_formattedDate.isNotEmpty) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    _formattedDate,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.primary,
+                Row(
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    Text(
+                      notification.title,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ],
+                    if (_formattedDate.isNotEmpty) ...[
+                      const SizedBox(height: 8),
+                      Text(
+                        _formattedDate,
+                        style: AppTextStyles.labelSmall(
+                          color: AppColors.info400,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+                Gap.h8,
+                Text(notification.body, style: theme.textTheme.bodyMedium),
               ],
             ),
           ),

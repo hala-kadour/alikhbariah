@@ -33,8 +33,11 @@ abstract class  LocaleKeys {
   static const onboarding_desc_2 = 'onboarding.desc_2';
   static const onboarding_desc_3 = 'onboarding.desc_3';
   static const onboarding = 'onboarding';
+  static const news_urgent = 'news.urgent';
   static const news_latest = 'news.latest';
   static const news_breaking = 'news.breaking';
+  static const news_featured = 'news.featured';
+  static const news_most_readed = 'news.most_readed';
   static const news_post_details = 'news.post_details';
   static const news_related_posts = 'news.related_posts';
   static const news_popular_tags = 'news.popular_tags';
@@ -45,6 +48,7 @@ abstract class  LocaleKeys {
   static const news_favorite = 'news.favorite';
   static const news_read_later = 'news.read_later';
   static const news_add_bookmark = 'news.add_bookmark';
+  static const news_rename_bookmark = 'news.rename_bookmark';
   static const news_save_in_collection = 'news.save_in_collection';
   static const news_views_count = 'news.views_count';
   static const news_news_count = 'news.news_count';

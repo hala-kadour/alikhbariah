@@ -27,16 +27,19 @@ class BreakingNewsPage extends StatelessWidget {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 if (data.isEmpty) {
-                  return EmptyStatusAnimation(
-                    title: LocaleKeys.empty_no_news.tr(),
+                  return Center(
+                    child: EmptyStatusAnimation(
+                      title: LocaleKeys.empty_no_news.tr(),
+                    ),
                   );
                 } else {
                   return NewsCard(post: data[index]);
                 }
               },
             ),
-            error: (error, _) =>
-                ErrorStatusAnimation(errorMessage: "Error: $error"),
+            error: (error, _) => Center(
+              child: ErrorStatusAnimation(errorMessage: "Error: $error"),
+            ),
             loading: () => LoadingNewsCards(),
           );
         },

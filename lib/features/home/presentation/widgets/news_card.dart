@@ -1,3 +1,4 @@
+import 'package:alikhbariah/config/constant/assets_path.dart';
 import 'package:alikhbariah/config/router/app_route_config.dart';
 import 'package:alikhbariah/config/theme/app_colors.dart';
 import 'package:alikhbariah/core/helper/time_formatter.dart';
@@ -6,6 +7,7 @@ import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -27,6 +29,13 @@ class NewsCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).inputDecorationTheme.fillColor,
           borderRadius: BorderRadius.circular(8.0),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).dividerColor,
+              blurRadius: 0.5,
+              offset: Offset(0, 1),
+            ),
+          ],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,18 +48,34 @@ class NewsCard extends StatelessWidget {
                   topEnd: Radius.circular(16.0),
                   bottomStart: Radius.circular(16.0),
                 ),
-                child: AspectRatio(
-                  aspectRatio: 1.2,
-                  child: Image.network(
-                    post.imageUrl ?? '',
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    loadingBuilder: (context, child, loadingProgress) =>
-                        Skeleton.leaf(enabled: true, child: child),
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                child: Stack(
+                  alignment: .topEnd,
+                  children: [
+                    AspectRatio(
+                      aspectRatio: 1.2,
+                      child: Image.network(
+                        post.imageUrl ?? '',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        loadingBuilder: (context, child, loadingProgress) =>
+                            Skeleton.leaf(enabled: true, child: child),
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsetsGeometry.directional(
+                        top: 5,
+                        end: 5,
+                      ),
+                      child: SvgPicture.asset(
+                        AssetsPath.tinyLogo,
+                        width: 18,
+                        height: 18,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

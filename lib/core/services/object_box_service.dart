@@ -1,6 +1,5 @@
 import 'package:alikhbariah/features/bookmark/domain/entity/locale_post.dart';
 import 'package:alikhbariah/generated/objectbox.g.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
 
 class ObjectBoxService {
@@ -23,8 +22,8 @@ class ObjectBoxService {
   void _prepareDefaultCollections() {
     if (collectionBox.isEmpty()) {
       collectionBox.putMany([
-        LocalCollection(name: LocaleKeys.news_read_later.tr()),
-        LocalCollection(name: LocaleKeys.news_favorite.tr()),
+        LocalCollection(name: LocaleKeys.news_read_later),
+        LocalCollection(name: LocaleKeys.news_favorite),
       ]);
     }
   }

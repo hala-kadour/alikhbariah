@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../widgets/breaking_news_page_view.dart';
+import '../widgets/featured_posts_view_cards.dart';
 import '../widgets/home_app_bar.dart';
+import '../widgets/most_readed_posts_view_cards.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,6 +46,18 @@ class _HomePageState extends State<HomePage> {
                         context.pushNamed(AppRouteConfig.latestPosts),
                   ),
                   LatestPostsViewCards(),
+                  SectionTitle(
+                    title: LocaleKeys.news_featured.tr(),
+                    onPressed: () =>
+                        context.pushNamed(AppRouteConfig.featuredPosts),
+                  ),
+                  FeaturedPostsViewCards(),
+                  SectionTitle(
+                    title: LocaleKeys.news_most_readed.tr(),
+                    onPressed: () =>
+                        context.pushNamed(AppRouteConfig.mostReadedPosts),
+                  ),
+                  MostReadedPostsViewCards(),
                   SectionTitle(
                     title: LocaleKeys.news_videos.tr(),
                     onPressed: () => context.pushNamed(

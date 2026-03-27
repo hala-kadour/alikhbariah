@@ -1,5 +1,7 @@
 import 'package:alikhbariah/config/router/app_route_config.dart';
 import 'package:alikhbariah/core/widgets/animation/empty_status_animation.dart';
+import 'package:alikhbariah/core/widgets/animation/error_status_animation.dart';
+import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
 import 'package:alikhbariah/features/home/data/models/video/video_category_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
@@ -19,11 +21,15 @@ class VideosPage extends ConsumerWidget {
     final videosAsync = ref.watch(videosProvider(category.id));
 
     return Scaffold(
-      appBar: AppBar(title: Text(category.name)),
+      appBar: MainBackAppBar(title: category.name),
       body: videosAsync.when(
         data: (videos) {
           if (videos.isEmpty) {
-            return EmptyStatusAnimation(title: LocaleKeys.empty_no_videos.tr());
+            return Center(
+              child: EmptyStatusAnimation(
+                title: LocaleKeys.empty_no_videos.tr(),
+              ),
+            );
           }
           return ListView.builder(
             itemCount: videos.length,
@@ -46,7 +52,8 @@ class VideosPage extends ConsumerWidget {
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, _) => Center(child: Text("Error : $err")),
+        error: (err, _) =>
+            Center(child: ErrorStatusAnimation(errorMessage: "$err")),
       ),
     );
   }

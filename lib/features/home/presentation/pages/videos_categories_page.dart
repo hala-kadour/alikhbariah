@@ -1,3 +1,4 @@
+import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +17,10 @@ class VideosCategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          type.contains('program')
-              ? LocaleKeys.news_programs.tr()
-              : LocaleKeys.news_videos.tr(),
-        ),
+      appBar: MainBackAppBar(
+        title: type.contains('program')
+            ? LocaleKeys.news_programs.tr()
+            : LocaleKeys.news_videos.tr(),
       ),
       body: Consumer(
         builder: (context, ref, child) {
@@ -37,8 +36,10 @@ class VideosCategoriesPage extends StatelessWidget {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 if (data.isEmpty) {
-                  return EmptyStatusAnimation(
-                    title: LocaleKeys.empty_no_categories.tr(),
+                  return Center(
+                    child: EmptyStatusAnimation(
+                      title: LocaleKeys.empty_no_categories.tr(),
+                    ),
                   );
                 } else {
                   return VideoCategoryCard(category: data[index]);
@@ -46,7 +47,7 @@ class VideosCategoriesPage extends StatelessWidget {
               },
             ),
             error: (error, _) =>
-                ErrorStatusAnimation(errorMessage: "Error: $error"),
+                Center(child: ErrorStatusAnimation(errorMessage: "$error")),
             loading: () => LoadingNewsCards(),
           );
         },

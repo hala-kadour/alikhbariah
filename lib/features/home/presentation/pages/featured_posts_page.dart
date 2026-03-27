@@ -10,16 +10,16 @@ import '../providers/home_providers.dart';
 import '../widgets/loading_news_cards.dart';
 import '../widgets/news_card.dart';
 
-class LatestPostsPage extends StatelessWidget {
-  const LatestPostsPage({super.key});
+class FeaturedPostsPage extends StatelessWidget {
+  const FeaturedPostsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainBackAppBar(title: LocaleKeys.news_latest.tr()),
+      appBar: MainBackAppBar(title: LocaleKeys.news_featured.tr()),
       body: Consumer(
         builder: (context, ref, child) {
-          final posts = ref.watch(latestPostsProvider);
+          final posts = ref.watch(featuredPostsProvider);
 
           return posts.when(
             data: (data) => ListView.builder(

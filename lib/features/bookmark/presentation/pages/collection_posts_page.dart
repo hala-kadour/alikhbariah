@@ -11,6 +11,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../config/theme/app_icons.dart';
 import '../../domain/entity/locale_post.dart';
 import '../providers/bookmark_provider.dart';
+import '../widgets/rename_collection_dialog.dart';
 import '../widgets/saved_post_tile.dart';
 
 class CollectionPostsPage extends ConsumerStatefulWidget {
@@ -47,6 +48,17 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
         action: PopupMenuButton(
           itemBuilder: (context) => [
             PopupMenuItem(
+              onTap: () {
+                Future.delayed(Duration.zero, () {
+                  if (!mounted) return;
+
+                  showDialog(
+                    context: context,
+                    builder: (context) =>
+                        RenameCollectionDialog(collection: collection),
+                  );
+                });
+              },
               child: Row(
                 spacing: 8.0,
                 children: [

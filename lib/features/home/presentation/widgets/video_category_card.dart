@@ -18,9 +18,22 @@ class VideoCategoryCard extends StatelessWidget {
           borderRadius: BorderRadiusGeometry.circular(8.0),
           child: Image.network(
             category.imageUrl ?? "",
-            fit: .cover,
-            loadingBuilder: (context, child, loadingProgress) =>
-                Skeletonizer(enabled: true, child: child),
+            fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              // إذا كان loadingProgress يساوي null، فهذا يعني أن الصورة اكتمل تحميلها
+              if (loadingProgress == null) return child;
+
+              return Skeletonizer(
+                enabled: true,
+                child: Container(
+                  color: Colors.grey[300],
+                  width: 100,
+                  height: 200,
+                ),
+              );
+            },
+            errorBuilder: (context, error, stackTrace) =>
+                const Icon(Icons.error),
           ),
         ),
       ),

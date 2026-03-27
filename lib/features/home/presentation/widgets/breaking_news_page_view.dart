@@ -53,7 +53,11 @@ class _BreakingNewsPageViewState extends State<BreakingNewsPageView> {
         return posts.when(
           data: (data) {
             if (data.isEmpty) {
-              return EmptyStatusAnimation(title: LocaleKeys.empty_no_news.tr());
+              return Center(
+                child: EmptyStatusAnimation(
+                  title: LocaleKeys.empty_no_news.tr(),
+                ),
+              );
             }
 
             return SizedBox(
@@ -76,7 +80,7 @@ class _BreakingNewsPageViewState extends State<BreakingNewsPageView> {
             );
           },
           error: (error, stackTrace) =>
-              ErrorStatusAnimation(errorMessage: "Error: $error"),
+              Center(child: ErrorStatusAnimation(errorMessage: "$error")),
           loading: () => const LoadingBreakingNewsCards(),
         );
       },

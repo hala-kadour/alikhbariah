@@ -33,8 +33,11 @@
     "desc_3": "تابع آخر الأخبار لحظة بلحظة من مصدر موثوق."
   },
   "news": {
+    "urgent" : "عاجل",
     "latest": "آخر الأخبار",
     "breaking": "أخبار عاجلة",
+    "featured": "أخبار مميزة",
+    "most_readed":"الأكثر قراءة",
     "post_details": "تفاصيل الخبر",
     "related_posts": "أخبار ذات صلة",
     "popular_tags": "الوسوم الشائعة",
@@ -45,6 +48,7 @@
     "favorite": "المفضلة",
     "read_later": "القراءة لاحقاً",
     "add_bookmark": "إضافة علامة مرجعية",
+    "rename_bookmark": "إعادة تسمية علامة مرجعية",
     "save_in_collection": "حفظ في مجموعة",
     "views_count": "{} مشاهدة",
     "news_count": "{} أخبار"

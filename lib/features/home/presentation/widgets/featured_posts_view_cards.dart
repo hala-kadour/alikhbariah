@@ -9,14 +9,14 @@ import '../../../../translations/locale_keys.g.dart';
 import 'loading_news_cards.dart';
 import 'news_card.dart';
 
-class LatestPostsViewCards extends StatelessWidget {
-  const LatestPostsViewCards({super.key});
+class FeaturedPostsViewCards extends StatelessWidget {
+  const FeaturedPostsViewCards({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final posts = ref.watch(latestPostsProvider);
+        final posts = ref.watch(featuredPostsProvider);
 
         return posts.when(
           data: (data) => ListView.builder(

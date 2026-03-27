@@ -61,6 +61,12 @@ class BookmarkNotifier extends StateNotifier<List<LocalCollection>> {
     refresh();
   }
 
+  void updateCollectionName(LocalCollection collection, String newName) {
+    collection.name = newName;
+    _ref.read(saveCollectionUC).call(collection);
+    refresh();
+  }
+
   Future<void> savePost({
     required PostModel post,
     required int collectionId,

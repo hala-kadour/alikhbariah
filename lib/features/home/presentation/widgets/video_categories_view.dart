@@ -27,8 +27,10 @@ class VideoCategoriesView extends StatelessWidget {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 if (data.isEmpty) {
-                  return EmptyStatusAnimation(
-                    title: LocaleKeys.empty_no_categories.tr(),
+                  return Center(
+                    child: EmptyStatusAnimation(
+                      title: LocaleKeys.empty_no_categories.tr(),
+                    ),
                   );
                 } else {
                   return VideoCategoryCard(category: data[index]);
@@ -37,7 +39,7 @@ class VideoCategoriesView extends StatelessWidget {
             ),
           ),
           error: (error, _) =>
-              ErrorStatusAnimation(errorMessage: "Error: $error"),
+              Center(child: ErrorStatusAnimation(errorMessage: "$error")),
           loading: () => LoadingVideoCategoryCards(),
         );
       },

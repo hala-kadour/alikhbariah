@@ -18,6 +18,8 @@ import 'package:alikhbariah/features/explore/domain/usecases/get_tag_posts_use_c
 import 'package:alikhbariah/features/home/data/datasource/home_supabase_data_source.dart';
 import 'package:alikhbariah/features/home/domain/usecases/get_breaking_posts_use_case.dart';
 import 'package:alikhbariah/features/home/domain/usecases/get_featured_posts_use_case.dart';
+import 'package:alikhbariah/features/home/domain/usecases/get_most_readed_posts_use_case.dart';
+import 'package:alikhbariah/features/home/domain/usecases/get_news_bar_use_case.dart';
 import 'package:alikhbariah/features/home/domain/usecases/get_post_tags_use_case.dart';
 import 'package:alikhbariah/features/home/domain/usecases/get_related_posts_use_case.dart';
 import 'package:alikhbariah/features/home/domain/usecases/get_videos_categories_use_case.dart';
@@ -76,12 +78,14 @@ void _initHomeFeature() {
     () => HomeSupabaseDataSourceImpl(sl()),
   );
 
-  // 2. Repository
+  // 2. Repositorya
   sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(sl()));
 
   // 3. Use Cases
+  sl.registerLazySingleton(() => GetNewsBarUseCase(sl()));
   sl.registerLazySingleton(() => GetBreakingPostsUseCase(sl()));
   sl.registerLazySingleton(() => GetFeaturedPostsUseCase(sl()));
+  sl.registerLazySingleton(() => GetMostReadedPostsUseCase(sl()));
   sl.registerLazySingleton(() => GetLatestPostsUseCase(sl()));
   sl.registerLazySingleton(() => GetVideosCategoriesUseCase(sl()));
   sl.registerLazySingleton(() => GetVideosUseCase(sl()));

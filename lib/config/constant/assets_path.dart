@@ -7,6 +7,7 @@ class AssetsPath {
   static const onBoarding3 = "${_pngPath}on_board_3.jpg";
 
   // SVGs Images
+  static const tinyLogo = "${_svgPath}tiny_logo.svg";
   static const smallLogo = "${_svgPath}small_logo.svg";
   static const bigLogo = "${_svgPath}big_logo.svg";
 }

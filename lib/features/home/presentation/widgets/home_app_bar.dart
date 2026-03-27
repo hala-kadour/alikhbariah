@@ -18,10 +18,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: SvgPicture.asset(AssetsPath.bigLogo, width: 40, height: 40),
       ),
       actions: [LiveStreamButton(), const NotificationButton()],
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(56),
-        child: NewsBar(),
-      ),
+      bottom: NewsBar(),
     );
   }
 

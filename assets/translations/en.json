@@ -33,8 +33,11 @@
     "desc_3": "Stay updated with the latest news, moment by moment, from a trusted source."
   },
   "news": {
+    "urgent" : "Urgent",
     "latest": "Latest Posts",
     "breaking": "Breaking News",
+    "featured": "featured News",
+    "most_readed":"Most Readed",
     "post_details": "Post Details",
     "related_posts": "Related Posts",
     "popular_tags": "Popular tags",
@@ -45,6 +48,7 @@
     "favorite": "Favorite",
     "read_later": "Read Later",
     "add_bookmark": "Add new bookmark",
+    "rename_bookmark": "Rename bookmark",
     "save_in_collection": "Save in a collection",
     "views_count": "{} views",
     "news_count": "{} News"
