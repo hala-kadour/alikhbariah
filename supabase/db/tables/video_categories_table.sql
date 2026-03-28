@@ -4,3 +4,25 @@ CREATE TABLE video_categories (
   image_url text,
   type text CHECK (type IN ('program', 'news_video')) -- للتمييز بين البرنامج والفقرة الإخبارية
 );
+
+alter table public.video_categories enable row level security;
+
+create policy "Public can read video_categories"
+on public.video_categories
+for select
+using (true);
+
+create policy "Admin can insert video_categories"
+on public.video_categories
+for insert
+with check (public.is_admin());
+
+create policy "Admin can update video_categories"
+on public.video_categories
+for update
+using (public.is_admin());
+
+create policy "Admin can delete video_categories"
+on public.video_categories
+for delete
+using (public.is_admin());

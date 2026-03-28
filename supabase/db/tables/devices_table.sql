@@ -8,6 +8,11 @@ create table if not exists devices (
 
 alter table public.devices enable row level security;
 
+create policy "Admin can read devices"
+on public.devices
+for select
+using (public.is_admin());
+
 create policy "Anyone can insert device token"
 on public.devices
 for insert
