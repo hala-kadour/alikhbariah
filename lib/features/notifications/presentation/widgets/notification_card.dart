@@ -2,6 +2,7 @@ import 'package:alikhbariah/config/scales/gap.dart';
 import 'package:alikhbariah/core/helper/time_formatter.dart';
 import 'package:alikhbariah/features/notifications/data/models/app_notification_model.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../config/theme/app_colors.dart';
 import '../../../../config/theme/app_text_styles.dart';
@@ -56,6 +57,11 @@ class NotificationCard extends StatelessWidget {
                     child: Image.network(
                       notification.imageUrl!,
                       fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+
+                        return Skeletonizer(enabled: true, child: child);
+                      },
                       errorBuilder: (context, error, stackTrace) =>
                           const Icon(Icons.notifications),
                     ),

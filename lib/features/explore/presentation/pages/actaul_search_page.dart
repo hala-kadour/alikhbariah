@@ -1,3 +1,4 @@
+import 'package:alikhbariah/core/widgets/animation/error_status_animation.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/loading_news_cards.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/news_card.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,13 +21,14 @@ class ActaulSearchPage extends ConsumerWidget {
     final posts = ref.watch(searchedPostsProvider);
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: MainBackAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextFormField(
+      body: Column(
+        crossAxisAlignment: .start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            child: TextFormField(
               autofocus: true,
               initialValue: searchQuery,
               onChanged: (value) {
@@ -45,21 +47,24 @@ class ActaulSearchPage extends ConsumerWidget {
                 suffixIcon: Icon(AppIcons.filterLight),
               ),
             ),
-            Gap.h24,
-            posts.when(
+          ),
+          Gap.h24,
+          Expanded(
+            child: posts.when(
               skipLoadingOnReload: true,
               skipLoadingOnRefresh: true,
-              data: (data) => Expanded(
-                child: ListView.builder(
-                  itemCount: data.length,
-                  itemBuilder: (context, index) => NewsCard(post: data[index]),
-                ),
+              data: (data) => ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                itemCount: data.length,
+                itemBuilder: (context, index) => NewsCard(post: data[index]),
               ),
-              error: (error, stackTrace) => Text("Error $error"),
-              loading: () => LoadingNewsCards(),
+              error: (error, stackTrace) =>
+                  ErrorStatusAnimation(errorMessage: "$error"),
+              loading: () => const LoadingNewsCards(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

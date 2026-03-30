@@ -40,7 +40,10 @@ ThemeData getDarkTheme() {
       onSecondaryContainer: AppColors.textOnActionDark,
       outline: AppColors.borderDefaultDark,
     ),
-    appBarTheme: AppBarTheme(backgroundColor: AppColors.surfacePageDark),
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.surfacePageDark,
+      scrolledUnderElevation: 0.0,
+    ),
     tabBarTheme: TabBarThemeData(
       tabAlignment: TabAlignment.start,
       dividerColor: Colors.transparent,

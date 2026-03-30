@@ -20,14 +20,13 @@ class VideoCategoryCard extends StatelessWidget {
             category.imageUrl ?? "",
             fit: BoxFit.cover,
             loadingBuilder: (context, child, loadingProgress) {
-              // إذا كان loadingProgress يساوي null، فهذا يعني أن الصورة اكتمل تحميلها
               if (loadingProgress == null) return child;
 
               return Skeletonizer(
                 enabled: true,
                 child: Container(
                   color: Colors.grey[300],
-                  width: 100,
+                  width: 150,
                   height: 200,
                 ),
               );

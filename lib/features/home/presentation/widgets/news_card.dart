@@ -57,8 +57,18 @@ class NewsCard extends StatelessWidget {
                         post.imageUrl ?? '',
                         fit: BoxFit.cover,
                         width: double.infinity,
-                        loadingBuilder: (context, child, loadingProgress) =>
-                            Skeleton.leaf(enabled: true, child: child),
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+
+                          return Skeletonizer(
+                            enabled: true,
+                            child: Container(
+                              color: Colors.grey[500],
+                              width: 150,
+                              height: 100,
+                            ),
+                          );
+                        },
                         errorBuilder: (context, error, stackTrace) => Container(
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),

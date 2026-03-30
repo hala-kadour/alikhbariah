@@ -39,13 +39,16 @@ ThemeData getLightTheme() {
       onSecondaryContainer: AppColors.textOnActionLight,
       outline: AppColors.borderDefaultLight,
     ),
-    appBarTheme: AppBarTheme(backgroundColor: AppColors.surfacePageLight),
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.surfacePageLight,
+      scrolledUnderElevation: 0.0,
+    ),
     tabBarTheme: TabBarThemeData(
       tabAlignment: TabAlignment.start,
       dividerColor: Colors.transparent,
       indicator: BoxDecoration(
         color: AppColors.primaryDefault,
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(12.0),
       ),
       indicatorSize: TabBarIndicatorSize.tab,
       labelStyle: AppTextStyles.labelMedium(

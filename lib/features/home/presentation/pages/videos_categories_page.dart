@@ -1,3 +1,4 @@
+import 'package:alikhbariah/core/widgets/animation/loading_status_animation.dart';
 import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/widgets/animation/empty_status_animation.dart';
 import '../../../../core/widgets/animation/error_status_animation.dart';
 import '../providers/home_providers.dart';
-import '../widgets/loading_news_cards.dart';
 import '../widgets/video_category_card.dart';
 
 class VideosCategoriesPage extends StatelessWidget {
@@ -31,6 +31,7 @@ class VideosCategoriesPage extends StatelessWidget {
               padding: EdgeInsets.only(top: 24.0, left: 16.0, right: 16.0),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
+                childAspectRatio: 0.8,
               ),
               shrinkWrap: true,
               itemCount: data.length,
@@ -48,7 +49,7 @@ class VideosCategoriesPage extends StatelessWidget {
             ),
             error: (error, _) =>
                 Center(child: ErrorStatusAnimation(errorMessage: "$error")),
-            loading: () => LoadingNewsCards(),
+            loading: () => LoadingStatusAnimation(),
           );
         },
       ),

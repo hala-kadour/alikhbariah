@@ -1,6 +1,7 @@
 import 'package:alikhbariah/config/router/app_route_config.dart';
 import 'package:alikhbariah/core/widgets/animation/empty_status_animation.dart';
 import 'package:alikhbariah/core/widgets/animation/error_status_animation.dart';
+import 'package:alikhbariah/core/widgets/animation/loading_status_animation.dart';
 import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
 import 'package:alikhbariah/features/home/data/models/video/video_category_model.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -51,7 +52,7 @@ class VideosPage extends ConsumerWidget {
             },
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const Center(child: LoadingStatusAnimation()),
         error: (err, _) =>
             Center(child: ErrorStatusAnimation(errorMessage: "$err")),
       ),
