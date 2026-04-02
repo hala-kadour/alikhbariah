@@ -1,8 +1,8 @@
 import 'package:alikhbariah/core/widgets/animation/empty_status_animation.dart';
 import 'package:alikhbariah/core/widgets/animation/error_status_animation.dart';
 import 'package:alikhbariah/features/home/presentation/providers/home_providers.dart';
-import 'package:alikhbariah/features/home/presentation/widgets/loading_video_category_cards.dart';
-import 'package:alikhbariah/features/home/presentation/widgets/video_category_card.dart';
+import 'package:alikhbariah/features/home/presentation/widgets/video/loading_video_category_cards.dart';
+import 'package:alikhbariah/features/home/presentation/widgets/video/video_category_card.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

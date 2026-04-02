@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../config/constant/assets_path.dart';
+import '../../../../../config/constant/assets_path.dart';
 
 class NewsBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
   const NewsBar({super.key});

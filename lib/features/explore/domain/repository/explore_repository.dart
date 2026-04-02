@@ -9,7 +9,11 @@ abstract class ExploreRepository {
   Future<Either<Failure, List<PostModel>>> getPostsByCategoryId(String? id);
   Future<Either<Failure, List<TagModel>>> getPopularTags();
   Future<Either<Failure, List<PostModel>>> getPostsByTagId(String id);
-  Future<Either<Failure, List<PostModel>>> getSearchedPosts(
+  Future<Either<Failure, List<PostModel>>> getSearchedPosts({
     String? searchQuery,
-  );
+    String? timeRange,
+    String? categoryId,
+    bool? isUrgent,
+    bool? isFeatured,
+  });
 }

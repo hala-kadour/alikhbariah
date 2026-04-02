@@ -11,6 +11,7 @@ import '../../../../config/theme/app_icons.dart';
 import '../../../../core/providers/recent_search_provider.dart';
 import '../../../../core/widgets/layout/navbar/main_back_app_bar.dart';
 import '../providers/explore_providers.dart';
+import '../widgets/search_filter_dialog.dart';
 
 class ActaulSearchPage extends ConsumerWidget {
   const ActaulSearchPage({super.key});
@@ -44,15 +45,19 @@ class ActaulSearchPage extends ConsumerWidget {
               decoration: InputDecoration(
                 hintText: LocaleKeys.search_placeholder.tr(),
                 prefixIcon: Icon(AppIcons.searchLight),
-                suffixIcon: Icon(AppIcons.filterLight),
+                suffixIcon: InkWell(
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (context) => const SearchFilterDialog(),
+                  ),
+                  child: Icon(AppIcons.filterLight),
+                ),
               ),
             ),
           ),
           Gap.h24,
           Expanded(
             child: posts.when(
-              skipLoadingOnReload: true,
-              skipLoadingOnRefresh: true,
               data: (data) => ListView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),

@@ -34,11 +34,21 @@ class ExploreRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, List<PostModel>>> getSearchedPosts(
+  Future<Either<Failure, List<PostModel>>> getSearchedPosts({
     String? searchQuery,
-  ) {
+    String? timeRange,
+    String? categoryId,
+    bool? isUrgent,
+    bool? isFeatured,
+  }) {
     return safeCall(
-      () => _exploreSupabaseDataSource.getSearchedPosts(searchQuery),
+      () => _exploreSupabaseDataSource.getSearchedPosts(
+        searchQuery: searchQuery,
+        timeRange: timeRange,
+        categoryId: categoryId,
+        isUrgent: isUrgent,
+        isFeatured: isFeatured,
+      ),
     );
   }
 }

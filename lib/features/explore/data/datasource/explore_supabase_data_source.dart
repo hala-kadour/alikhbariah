@@ -8,7 +8,13 @@ abstract class ExploreSupabaseDataSource {
   Future<List<PostModel>> getPostsByCategoryId(String? id);
   Future<List<TagModel>> getPopularTags();
   Future<List<PostModel>> getPostsByTagId(String id);
-  Future<List<PostModel>> getSearchedPosts(String? searchQuery);
+  Future<List<PostModel>> getSearchedPosts({
+    String? searchQuery,
+    String? timeRange,
+    String? categoryId,
+    bool? isUrgent,
+    bool? isFeatured,
+  });
 }
 
 class ExploreSupabaseDataSourceImpl implements ExploreSupabaseDataSource {
@@ -52,15 +58,54 @@ class ExploreSupabaseDataSourceImpl implements ExploreSupabaseDataSource {
   }
 
   @override
-  Future<List<PostModel>> getSearchedPosts(String? searchQuery) async {
+  Future<List<PostModel>> getSearchedPosts({
+    String? searchQuery,
+    String? timeRange,
+    String? categoryId,
+    bool? isUrgent,
+    bool? isFeatured,
+  }) async {
+    // 1. الاستعلام الأساسي للأخبار المنشورة فقط
     var query = _client.from(_postTable).select().eq('status', 'published');
 
-    if (searchQuery != null && searchQuery.isNotEmpty) {
+    // 2. فلترة البحث النصي (Title, Summary, Content, Location)
+    if (searchQuery != null && searchQuery.trim().isNotEmpty) {
       query = query.or(
         'title.ilike.%$searchQuery%,summary.ilike.%$searchQuery%,content.ilike.%$searchQuery%,location.ilike.%$searchQuery%',
       );
     }
 
+    // 3. فلترة الصنف (Category)
+    if (categoryId != null) {
+      query = query.eq('category_id', categoryId);
+    }
+
+    // 4. فلترة الأخبار العاجلة أو المميزة
+    if (isUrgent == true) {
+      query = query.eq('is_breaking', true);
+    }
+    if (isFeatured == true) {
+      query = query.eq('is_featured', true);
+    }
+
+    // 5. فلترة الزمن (Time Range)
+    if (timeRange != null && timeRange != "all_time") {
+      final DateTime now = DateTime.now();
+      DateTime filterDate;
+
+      if (timeRange == "today") {
+        filterDate = DateTime(now.year, now.month, now.day); // بداية اليوم
+      } else if (timeRange == "week") {
+        filterDate = now.subtract(const Duration(days: 7)); // منذ 7 أيام
+      } else {
+        filterDate = DateTime(1970); // افتراضي قديم جداً
+      }
+
+      // gte تعني Greater Than or Equal (أكبر من أو يساوي التاريخ المحدد)
+      query = query.gte('published_at', filterDate.toIso8601String());
+    }
+
+    // 6. الترتيب من الأحدث للأقدم
     final response = await query.order('published_at', ascending: false);
 
     return response.map<PostModel>((e) => PostModel.fromJson(e)).toList();

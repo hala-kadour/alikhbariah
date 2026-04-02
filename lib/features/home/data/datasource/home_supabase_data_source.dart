@@ -10,10 +10,16 @@ import '../models/video/video_model.dart';
 
 abstract class HomeSupabaseDataSource {
   Stream<List<BreakingNewsModel>> getNewsBar();
-  Stream<List<PostModel>> getBreakingPosts();
-  Stream<List<PostModel>> getFeaturedPosts();
-  Future<List<PostModel>> getMostReadedPosts();
-  Future<List<PostModel>> getLatestPosts();
+  Stream<List<PostModel>> getBreakingPosts({String? categoryId});
+  Stream<List<PostModel>> getFeaturedPosts({String? categoryId});
+  Future<List<PostModel>> getMostReadedPosts({
+    String? categoryId,
+    String? timeRange,
+  });
+  Future<List<PostModel>> getLatestPosts({
+    String? categoryId,
+    String? timeRange,
+  });
   Future<List<TagModel>> getTagsByPostId(String? id);
   Future<List<PostModel>> getRelatedPostsByPostId(String? id);
   Future<List<VideoCategoryModel>> getVideosCategories(String type);
@@ -48,31 +54,75 @@ class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
         );
   }
 
+  PostgrestFilterBuilder _applyFilters(
+    PostgrestFilterBuilder query,
+    String? categoryId,
+    String? timeRange,
+  ) {
+    var filteredQuery = query;
+
+    // 1. فلترة الصنف
+    if (categoryId != null) {
+      filteredQuery = filteredQuery.eq('category_id', categoryId);
+    }
+
+    // 2. فلترة الزمن
+    if (timeRange != null && timeRange != "all_time") {
+      final now = DateTime.now();
+      DateTime filterDate;
+      if (timeRange == "today") {
+        filterDate = DateTime(now.year, now.month, now.day);
+      } else if (timeRange == "week") {
+        filterDate = now.subtract(const Duration(days: 7));
+      } else {
+        filterDate = DateTime(1970);
+      }
+      filteredQuery = filteredQuery.gte(
+        'published_at',
+        filterDate.toIso8601String(),
+      );
+    }
+    return filteredQuery;
+  }
+
+  // تطبيق على الـ Streams
   @override
-  Stream<List<PostModel>> getBreakingPosts() {
+  Stream<List<PostModel>> getBreakingPosts({String? categoryId}) {
     return _client
         .from(_postTable)
         .stream(primaryKey: ['id'])
         .eq('is_breaking', true)
         .order('published_at', ascending: false)
-        .map(
-          (data) => data.map<PostModel>((e) => PostModel.fromJson(e)).toList(),
-        );
+        .map((data) {
+          var posts = data
+              .map<PostModel>((e) => PostModel.fromJson(e))
+              .toList();
+          if (categoryId != null) {
+            posts = posts.where((p) => p.categoryID == categoryId).toList();
+          }
+          return posts;
+        });
   }
 
   // ==============================
   // Featured News
   // ==============================
   @override
-  Stream<List<PostModel>> getFeaturedPosts() {
+  Stream<List<PostModel>> getFeaturedPosts({String? categoryId}) {
     return _client
         .from(_postTable)
         .stream(primaryKey: ['id'])
         .eq('is_featured', true)
         .order('published_at', ascending: false)
-        .map(
-          (data) => data.map<PostModel>((e) => PostModel.fromJson(e)).toList(),
-        );
+        .map((data) {
+          var posts = data
+              .map<PostModel>((e) => PostModel.fromJson(e))
+              .toList();
+          if (categoryId != null) {
+            posts = posts.where((p) => p.categoryID == categoryId).toList();
+          }
+          return posts;
+        });
   }
 
   // ==============================
@@ -80,24 +130,35 @@ class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
   // ==============================
 
   @override
-  Future<List<PostModel>> getLatestPosts() async {
-    final response = await _client
+  Future<List<PostModel>> getLatestPosts({
+    String? categoryId,
+    String? timeRange,
+  }) async {
+    PostgrestFilterBuilder<dynamic> query = _client
         .from(_postTable)
         .select()
-        .eq('status', 'published')
+        .eq('status', 'published');
+    query = _applyFilters(query, categoryId, timeRange);
+
+    final response = await query
         .order('published_at', ascending: false)
         .limit(10);
-
     return response.map<PostModel>((e) => PostModel.fromJson(e)).toList();
   }
 
   @override
-  Future<List<PostModel>> getMostReadedPosts() async {
-    final response = await _client
+  Future<List<PostModel>> getMostReadedPosts({
+    String? categoryId,
+    String? timeRange,
+  }) async {
+    PostgrestFilterBuilder<dynamic> query = _client
         .from(_postTable)
         .select()
-        .eq('status', 'published')
-        .order('views_count', ascending: false);
+        .eq('status', 'published');
+
+    query = _applyFilters(query, categoryId, timeRange);
+
+    final response = await query.order('views_count', ascending: false);
     return response.map<PostModel>((e) => PostModel.fromJson(e)).toList();
   }
 

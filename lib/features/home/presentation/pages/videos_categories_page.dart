@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/widgets/animation/empty_status_animation.dart';
 import '../../../../core/widgets/animation/error_status_animation.dart';
 import '../providers/home_providers.dart';
-import '../widgets/video_category_card.dart';
+import '../widgets/video/video_category_card.dart';
 
 class VideosCategoriesPage extends StatelessWidget {
   const VideosCategoriesPage({super.key, required this.type});

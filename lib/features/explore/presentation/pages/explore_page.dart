@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/helper/device_utility.dart';
 import '../../../home/presentation/widgets/loading_news_cards.dart';
-import '../../../home/presentation/widgets/loading_tab_bar.dart';
+import '../widgets/loading_tab_bar.dart';
 import '../../../home/presentation/widgets/news_card.dart';
 import '../providers/explore_providers.dart';
 

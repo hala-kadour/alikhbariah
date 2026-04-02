@@ -5,9 +5,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../translations/locale_keys.g.dart';
-import 'loading_news_cards.dart';
-import 'news_card.dart';
+import '../../../../../translations/locale_keys.g.dart';
+import '../loading_news_cards.dart';
+import '../news_card.dart';
 
 class MostReadedPostsViewCards extends StatelessWidget {
   const MostReadedPostsViewCards({super.key});
@@ -22,7 +22,7 @@ class MostReadedPostsViewCards extends StatelessWidget {
           data: (data) => ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: data.length > 3 ? 3 : data.length,
+            itemCount: data.length > 2 ? 2 : data.length,
             itemBuilder: (context, index) {
               if (data.isEmpty) {
                 return Center(

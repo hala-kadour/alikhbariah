@@ -25,6 +25,24 @@ final getRelatedPostsUC = Provider((ref) => sl<GetRelatedPostsUseCase>());
 
 // ================================================================= //
 
+// فلاتر خاصة بصفحة الهوم فقط
+final latestPostTimeFilterProvider = StateProvider<String>((ref) => "all_time");
+final mostReadedPostsTimeFilterProvider = StateProvider<String>(
+  (ref) => "all_time",
+);
+final breakingNewsCategoryFilterProvider = StateProvider<String?>(
+  (ref) => null,
+);
+final featuredPostsCategoryFilterProvider = StateProvider<String?>(
+  (ref) => null,
+);
+final latestPostCategoryFilterProvider = StateProvider<String?>((ref) => null);
+final mostReadedPostsCategoryFilterProvider = StateProvider<String?>(
+  (ref) => null,
+);
+
+// ================================================================= //
+
 final newsBarProvider = StreamProvider((ref) {
   final useCase = ref.watch(getNewsBarUC);
 
@@ -38,32 +56,42 @@ final newsBarProvider = StreamProvider((ref) {
 
 final breakingPostsProvider = StreamProvider((ref) {
   final useCase = ref.watch(getBreakingPostsUC);
+  final categoryId = ref.watch(breakingNewsCategoryFilterProvider);
 
-  return useCase.call().map((either) {
+  return useCase.call(categoryId).map((either) {
     return either.fold((failure) => throw failure.message, (posts) => posts);
   });
 });
 
 final featuredPostsProvider = StreamProvider((ref) {
   final useCase = ref.watch(getFeaturedPostsUC);
+  final categoryId = ref.watch(featuredPostsCategoryFilterProvider);
 
-  return useCase.call().map((either) {
+  return useCase.call(categoryId).map((either) {
     return either.fold((failure) => throw failure.message, (posts) => posts);
   });
 });
 
 final mostReadedPostsProvider = FutureProvider((ref) async {
   final useCase = ref.watch(getMostReadedPostsUC);
+  final time = ref.watch(mostReadedPostsTimeFilterProvider);
+  final categoryId = ref.watch(mostReadedPostsCategoryFilterProvider);
 
-  final result = await useCase.call();
+  final result = await useCase.call(
+    HomeFilters(categoryId: categoryId, timeRange: time),
+  );
 
   return result.fold((failure) => throw failure.message, (posts) => posts);
 });
 
 final latestPostsProvider = FutureProvider((ref) async {
   final useCase = ref.watch(getLatestPostsUC);
+  final time = ref.watch(latestPostTimeFilterProvider);
+  final categoryId = ref.watch(latestPostCategoryFilterProvider);
 
-  final result = await useCase.call();
+  final result = await useCase.call(
+    HomeFilters(categoryId: categoryId, timeRange: time),
+  );
 
   return result.fold((failure) => throw failure.message, (posts) => posts);
 });

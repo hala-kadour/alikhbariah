@@ -18,13 +18,33 @@ final getSearchedPostsUC = Provider((ref) => sl<GetSearchedPostsUseCase>());
 
 final getTagPostsUC = Provider((ref) => sl<GetTagPostsUseCase>());
 
+// فلاتر البحث
+final searchTimeFilterProvider = StateProvider<String>((ref) => "all_time");
+final searchCategoryFilterProvider = StateProvider<String?>(
+  (ref) => null,
+); // null تعني الكل
+final isUrgentFilterProvider = StateProvider<bool>((ref) => false);
+final isFeaturedFilterProvider = StateProvider<bool>((ref) => false);
 final searchProvider = StateProvider<String?>((ref) => null);
 
 final searchedPostsProvider = FutureProvider.autoDispose((ref) async {
   final useCase = ref.watch(getSearchedPostsUC);
+  // مراقبة الفلاتر
+  final timeFilter = ref.watch(searchTimeFilterProvider);
+  final categoryId = ref.watch(searchCategoryFilterProvider);
+  final isUrgent = ref.watch(isUrgentFilterProvider);
+  final isFeatured = ref.watch(isFeaturedFilterProvider);
   final searchQuery = ref.watch(searchProvider);
 
-  final result = await useCase.call(searchQuery);
+  final result = await useCase.call(
+    SearchFilters(
+      searchQuery: searchQuery,
+      timeRange: timeFilter,
+      categoryId: categoryId,
+      isUrgent: isUrgent,
+      isFeatured: isFeatured,
+    ),
+  );
 
   return result.fold((failure) => throw failure.message, (posts) => posts);
 });

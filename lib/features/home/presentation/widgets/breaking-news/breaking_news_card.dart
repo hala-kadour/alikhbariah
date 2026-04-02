@@ -6,10 +6,10 @@ import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../config/scales/gap.dart';
-import '../../../../core/helper/device_utility.dart';
-import '../../../../core/helper/time_formatter.dart';
-import '../../../../core/widgets/containers/custom_linear_gradient_container.dart';
+import '../../../../../config/scales/gap.dart';
+import '../../../../../core/helper/device_utility.dart';
+import '../../../../../core/helper/time_formatter.dart';
+import '../../../../../core/widgets/containers/custom_linear_gradient_container.dart';
 import 'breaking_news_indicators.dart';
 
 class BreakingNewsCard extends StatelessWidget {

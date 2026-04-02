@@ -1,17 +1,18 @@
 import 'package:alikhbariah/core/error/failure.dart';
-import 'package:alikhbariah/core/usecases/no_param_use_case.dart';
 import 'package:alikhbariah/features/home/data/models/post/post_model.dart';
 import 'package:alikhbariah/features/home/domain/repository/home_repository.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../../core/usecases/use_case.dart';
+
 class GetBreakingPostsUseCase
-    extends NoParamUseCase<Stream<Either<Failure, List<PostModel>>>> {
+    extends UseCase<Stream<Either<Failure, List<PostModel>>>, String?> {
   final HomeRepository _homeRepository;
 
   GetBreakingPostsUseCase(this._homeRepository);
 
   @override
-  Stream<Either<Failure, List<PostModel>>> call() {
-    return _homeRepository.getBreakingPosts();
+  Stream<Either<Failure, List<PostModel>>> call(String? param) {
+    return _homeRepository.getBreakingPosts(categoryId: param);
   }
 }

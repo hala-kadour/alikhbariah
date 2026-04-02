@@ -14,6 +14,9 @@ abstract class  LocaleKeys {
   static const common_choose_language = 'common.choose_language';
   static const common_dark_mode = 'common.dark_mode';
   static const common_light_mode = 'common.light_mode';
+  static const common_about_us = 'common.about_us';
+  static const common_contact_us = 'common.contact_us';
+  static const common_about_description = 'common.about_description';
   static const common_skip = 'common.skip';
   static const common_next = 'common.next';
   static const common_cancel = 'common.cancel';
@@ -57,6 +60,17 @@ abstract class  LocaleKeys {
   static const search_title = 'search.title';
   static const search_saved = 'search.saved';
   static const search_recent = 'search.recent';
+  static const search_filter = 'search.filter';
+  static const search_time = 'search.time';
+  static const search_category = 'search.category';
+  static const search_status = 'search.status';
+  static const search_urgent = 'search.urgent';
+  static const search_featured = 'search.featured';
+  static const search_all_time = 'search.all_time';
+  static const search_today = 'search.today';
+  static const search_this_week = 'search.this_week';
+  static const search_apply = 'search.apply';
+  static const search_clear = 'search.clear';
   static const search = 'search';
   static const time_moments_ago = 'time.moments_ago';
   static const time_hours_ago = 'time.hours_ago';

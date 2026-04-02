@@ -9,10 +9,20 @@ import '../../data/models/video/video_model.dart';
 
 abstract class HomeRepository {
   Stream<Either<Failure, List<BreakingNewsModel>>> getNewsBar();
-  Stream<Either<Failure, List<PostModel>>> getBreakingPosts();
-  Stream<Either<Failure, List<PostModel>>> getFeaturedPosts();
-  Future<Either<Failure, List<PostModel>>> getMostReadedPosts();
-  Future<Either<Failure, List<PostModel>>> getLatestPosts();
+  Stream<Either<Failure, List<PostModel>>> getBreakingPosts({
+    String? categoryId,
+  });
+  Stream<Either<Failure, List<PostModel>>> getFeaturedPosts({
+    String? categoryId,
+  });
+  Future<Either<Failure, List<PostModel>>> getMostReadedPosts({
+    String? categoryId,
+    String? timeRange,
+  });
+  Future<Either<Failure, List<PostModel>>> getLatestPosts({
+    String? categoryId,
+    String? timeRange,
+  });
   Future<Either<Failure, List<TagModel>>> getTagsByPostId(String? id);
   Future<Either<Failure, List<PostModel>>> getRelatedPostsByPostId(String? id);
   Future<Either<Failure, List<VideoCategoryModel>>> getVideosCategories(

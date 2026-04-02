@@ -20,23 +20,48 @@ class HomeRepositoryImpl with ErrorHandlingManager implements HomeRepository {
   }
 
   @override
-  Stream<Either<Failure, List<PostModel>>> getBreakingPosts() {
-    return safeStream(_homeSupabaseDatasource.getBreakingPosts());
+  Stream<Either<Failure, List<PostModel>>> getBreakingPosts({
+    String? categoryId,
+  }) {
+    return safeStream(
+      _homeSupabaseDatasource.getBreakingPosts(categoryId: categoryId),
+    );
   }
 
   @override
-  Stream<Either<Failure, List<PostModel>>> getFeaturedPosts() {
-    return safeStream(_homeSupabaseDatasource.getFeaturedPosts());
+  Stream<Either<Failure, List<PostModel>>> getFeaturedPosts({
+    String? categoryId,
+    String? timeRange,
+  }) {
+    return safeStream(
+      _homeSupabaseDatasource.getFeaturedPosts(categoryId: categoryId),
+    );
   }
 
   @override
-  Future<Either<Failure, List<PostModel>>> getMostReadedPosts() {
-    return safeCall(() => _homeSupabaseDatasource.getMostReadedPosts());
+  Future<Either<Failure, List<PostModel>>> getMostReadedPosts({
+    String? categoryId,
+    String? timeRange,
+  }) {
+    return safeCall(
+      () => _homeSupabaseDatasource.getMostReadedPosts(
+        categoryId: categoryId,
+        timeRange: timeRange,
+      ),
+    );
   }
 
   @override
-  Future<Either<Failure, List<PostModel>>> getLatestPosts() {
-    return safeCall(() => _homeSupabaseDatasource.getLatestPosts());
+  Future<Either<Failure, List<PostModel>>> getLatestPosts({
+    String? categoryId,
+    String? timeRange,
+  }) {
+    return safeCall(
+      () => _homeSupabaseDatasource.getLatestPosts(
+        categoryId: categoryId,
+        timeRange: timeRange,
+      ),
+    );
   }
 
   @override

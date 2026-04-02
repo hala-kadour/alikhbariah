@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../core/helper/device_utility.dart';
+import '../../../../../core/helper/device_utility.dart';
 
 class LoadingBreakingNewsCards extends StatefulWidget {
   const LoadingBreakingNewsCards({super.key});

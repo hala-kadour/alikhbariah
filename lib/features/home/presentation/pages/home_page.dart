@@ -1,17 +1,17 @@
 import 'package:alikhbariah/config/router/app_route_config.dart';
 import 'package:alikhbariah/config/scales/gap.dart';
-import 'package:alikhbariah/features/home/presentation/widgets/latest_posts_view_cards.dart';
+import 'package:alikhbariah/features/home/presentation/widgets/latest-posts/latest_posts_view_cards.dart';
 import 'package:alikhbariah/features/home/presentation/widgets/section_title.dart';
-import 'package:alikhbariah/features/home/presentation/widgets/video_categories_view.dart';
+import 'package:alikhbariah/features/home/presentation/widgets/video/video_categories_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../widgets/breaking_news_page_view.dart';
-import '../widgets/featured_posts_view_cards.dart';
-import '../widgets/home_app_bar.dart';
-import '../widgets/most_readed_posts_view_cards.dart';
+import '../widgets/breaking-news/breaking_news_page_view.dart';
+import '../widgets/featured-posts/featured_posts_view_cards.dart';
+import '../widgets/app-bar/home_app_bar.dart';
+import '../widgets/most-readed/most_readed_posts_view_cards.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

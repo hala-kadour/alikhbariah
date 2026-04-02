@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/services/navigation_service.dart';
 
@@ -81,7 +82,11 @@ class NotificationService {
   }
 
   /// عرض الإشعار
-  void _showNotification(RemoteMessage message) {
+  void _showNotification(RemoteMessage message) async {
+    final prefs = await SharedPreferences.getInstance();
+    final isEnabled = prefs.getBool('notifications_enabled') ?? true;
+
+    if (!isEnabled) return;
     final imageUrl =
         message.notification?.android?.imageUrl ?? message.data['imageUrl'];
 
@@ -137,6 +142,11 @@ class NotificationService {
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  final prefs = await SharedPreferences.getInstance();
+  final isEnabled = prefs.getBool('notifications_enabled') ?? true;
+
+  if (!isEnabled) return;
 
   final imageUrl =
       message.notification?.android?.imageUrl ?? message.data['imageUrl'];

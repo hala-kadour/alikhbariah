@@ -2,13 +2,13 @@ import 'dart:async';
 import 'package:alikhbariah/core/widgets/animation/empty_status_animation.dart';
 import 'package:alikhbariah/core/widgets/animation/error_status_animation.dart';
 import 'package:alikhbariah/features/home/presentation/providers/home_providers.dart';
-import 'package:alikhbariah/features/home/presentation/widgets/breaking_news_card.dart';
+import 'package:alikhbariah/features/home/presentation/widgets/breaking-news/breaking_news_card.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/helper/device_utility.dart';
+import '../../../../../core/helper/device_utility.dart';
 import 'loading_breaking_news_cards.dart';
 
 class BreakingNewsPageView extends StatefulWidget {
