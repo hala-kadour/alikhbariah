@@ -23,7 +23,7 @@ abstract class HomeSupabaseDataSource {
   Future<List<TagModel>> getTagsByPostId(String? id);
   Future<List<PostModel>> getRelatedPostsByPostId(String? id);
   Future<List<VideoCategoryModel>> getVideosCategories(String type);
-  Future<List<VideoModel>> getVideos(String categoryId);
+  Future<List<VideoModel>> getVideos(String categoryId, String? searchQuery);
 }
 
 class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
@@ -178,12 +178,18 @@ class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
   }
 
   @override
-  Future<List<VideoModel>> getVideos(String categoryId) async {
-    final response = await _client
-        .from(_videos)
-        .select()
-        .eq('category_id', categoryId)
-        .order('created_at', ascending: false);
+  Future<List<VideoModel>> getVideos(
+    String categoryId,
+    String? searchQuery,
+  ) async {
+    var query = _client.from(_videos).select().eq('category_id', categoryId);
+
+    if (searchQuery != null && searchQuery.trim().isNotEmpty) {
+      query = query.like('title', '%${searchQuery.trim()}%');
+    }
+
+    final response = await query.order('created_at', ascending: false);
+
     return response.map<VideoModel>((e) => VideoModel.fromJson(e)).toList();
   }
 
@@ -198,7 +204,7 @@ class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
       // استدعاء الـ Database Function التي أنشأناها (RPC)
       final List<dynamic> response = await _client.rpc(
         'get_related_posts', // اسم الفنكشن في SQL
-        params: {'current_post_id': id, 'limit_count': 10},
+        params: {'current_post_id': id, 'limit_count': 5},
       );
 
       // تحويل النتيجة مباشرة لموديل

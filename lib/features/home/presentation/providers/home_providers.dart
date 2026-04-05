@@ -8,6 +8,7 @@ import 'package:alikhbariah/features/home/domain/usecases/get_videos_use_case.da
 import 'package:alikhbariah/injection_container.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/models/video/video_model.dart';
 import '../../domain/usecases/get_breaking_posts_use_case.dart';
 import '../../domain/usecases/get_latest_posts_use_case.dart';
 
@@ -40,6 +41,9 @@ final latestPostCategoryFilterProvider = StateProvider<String?>((ref) => null);
 final mostReadedPostsCategoryFilterProvider = StateProvider<String?>(
   (ref) => null,
 );
+
+// البحث الخاص بالفيديوهات
+final videoSearchProvider = StateProvider<String?>((ref) => null);
 
 // ================================================================= //
 
@@ -110,13 +114,20 @@ final videosCategoriesProvider = FutureProvider.family((
   );
 });
 
-final videosProvider = FutureProvider.family((ref, String id) async {
-  final useCase = ref.watch(getVideosUC);
+final videosProvider =
+    FutureProvider.family<List<VideoModel>, VideoSearchParam>((
+      ref,
+      param,
+    ) async {
+      final useCase = ref.watch(getVideosUC);
 
-  final result = await useCase.call(id);
+      final result = await useCase.call(param);
 
-  return result.fold((failure) => throw failure.message, (videos) => videos);
-});
+      return result.fold(
+        (failure) => throw failure.message,
+        (videos) => videos,
+      );
+    });
 
 final postTagsProvider = FutureProvider.family((ref, String id) async {
   final useCase = ref.watch(getPostTagsUC);

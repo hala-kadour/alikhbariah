@@ -10,18 +10,18 @@ class VideoCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => context.pushNamed(AppRouteConfig.videos, extra: category),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ClipRRect(
-          borderRadius: BorderRadiusGeometry.circular(8.0),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadiusGeometry.circular(8.0),
+        child: InkWell(
+          onTap: () =>
+              context.pushNamed(AppRouteConfig.videos, extra: category),
           child: Image.network(
             category.imageUrl ?? "",
             fit: BoxFit.cover,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) return child;
-
               return Skeletonizer(
                 enabled: true,
                 child: Container(

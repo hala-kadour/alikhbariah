@@ -10,6 +10,13 @@ class AssetsPath {
   static const tinyLogo = "${_svgPath}tiny_logo.svg";
   static const smallLogo = "${_svgPath}small_logo.svg";
   static const bigLogo = "${_svgPath}big_logo.svg";
+
+  static const web = "${_svgPath}web.svg";
+  static const facebook = "${_svgPath}facebook.svg";
+  static const telegram = "${_svgPath}telegram.svg";
+  static const youtube = "${_svgPath}youtupe.svg";
+  static const instagram = "${_svgPath}instagram.svg";
+  static const x = "${_svgPath}x.svg";
 }
 
 class AnimationsPath {

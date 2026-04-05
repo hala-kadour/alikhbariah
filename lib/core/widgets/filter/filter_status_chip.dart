@@ -22,13 +22,15 @@ class FilterStatusChip extends StatelessWidget {
       label: Text(label),
       selected: isSelected,
       onSelected: onSelected,
-      selectedColor: AppColors.primary600.withValues(alpha: 0.1),
-      checkmarkColor: AppColors.primary600,
+      selectedColor: AppColors.primaryDefault.withValues(alpha: 0.2),
+      backgroundColor: Theme.of(context).inputDecorationTheme.fillColor,
+      checkmarkColor: AppColors.primaryDefault,
       labelStyle: TextStyle(
         color: isSelected
-            ? AppColors.primary600
+            ? AppColors.primaryDefault
             : Theme.of(context).colorScheme.onSurfaceVariant,
         fontSize: 12,
+        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
       ),
     );
   }

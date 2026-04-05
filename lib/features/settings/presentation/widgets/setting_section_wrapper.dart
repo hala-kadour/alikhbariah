@@ -28,13 +28,14 @@ class SettingSectionWrapper extends StatelessWidget {
         Gap.h8,
         Container(
           padding: const EdgeInsets.all(16.0),
+          alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0), // زوايا أنعم شوي
+            borderRadius: BorderRadius.circular(12.0),
             color: Theme.of(context).inputDecorationTheme.fillColor,
           ),
           child: child,
         ),
-        Gap.h24, // مسافة بين كل قسم وقسم
+        Gap.h24,
       ],
     );
   }

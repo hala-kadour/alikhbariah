@@ -28,5 +28,8 @@ abstract class HomeRepository {
   Future<Either<Failure, List<VideoCategoryModel>>> getVideosCategories(
     String type,
   );
-  Future<Either<Failure, List<VideoModel>>> getVideos(String categoryId);
+  Future<Either<Failure, List<VideoModel>>> getVideos(
+    String categoryId,
+    String? searchQuery,
+  );
 }

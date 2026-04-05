@@ -20,7 +20,7 @@ abstract class ExploreSupabaseDataSource {
 class ExploreSupabaseDataSourceImpl implements ExploreSupabaseDataSource {
   final SupabaseClient _client;
   final String _postTable = 'posts';
-  final String _tagTable = 'tags';
+  //final String _tagTable = 'tags';
   final String _categoryTable = 'categories';
   final String _postTagsTabel = 'post_tags';
 
@@ -38,10 +38,10 @@ class ExploreSupabaseDataSourceImpl implements ExploreSupabaseDataSource {
 
   @override
   Future<List<TagModel>> getPopularTags() async {
-    final response = await _client.from(_postTagsTabel).select('$_tagTable(*)');
+    final response = await _client.rpc('get_popular_tags');
 
-    return response
-        .map<TagModel>((e) => TagModel.fromJson(e[_tagTable]))
+    return (response as List)
+        .map<TagModel>((e) => TagModel.fromJson(e))
         .toList();
   }
 

@@ -75,8 +75,13 @@ class HomeRepositoryImpl with ErrorHandlingManager implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, List<VideoModel>>> getVideos(String categoryId) {
-    return safeCall(() => _homeSupabaseDatasource.getVideos(categoryId));
+  Future<Either<Failure, List<VideoModel>>> getVideos(
+    String categoryId,
+    String? searchQuery,
+  ) {
+    return safeCall(
+      () => _homeSupabaseDatasource.getVideos(categoryId, searchQuery),
+    );
   }
 
   @override
