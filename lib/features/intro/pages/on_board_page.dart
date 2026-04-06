@@ -163,7 +163,6 @@ class _OnBoardingItem extends StatelessWidget {
             ],
           ),
         ),
-        Spacer(),
       ],
     );
   }

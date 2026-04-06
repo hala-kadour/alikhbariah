@@ -54,7 +54,12 @@
     "rename_bookmark": "إعادة تسمية علامة مرجعية",
     "save_in_collection": "حفظ في مجموعة",
     "views_count": "{} مشاهدة",
-    "news_count": "{} أخبار"
+    "news_count": "{} أخبار",
+    "delete_post": "حذف المنشور",
+    "delete_post_confirm": "هل أنت متأكد من رغبتك في حذف هذا المنشور؟",
+    "delete_category": "حذف الفئة",
+    "delete_category_confirm": "هل أنت متأكد من رغبتك في حذف هذه الفئة؟"
+
   },
   "search": {
     "placeholder": "بحث في العنوان، الملخص، الموقع...",
@@ -109,7 +114,9 @@
     "database_error": "خطأ في الوصول لقاعدة البيانات",
     "invalid_credentials": "بيانات الدخول غير صحيحة، تأكد من الإيميل وكلمة السر",
     "user_exists": "هذا الحساب مسجل مسبقاً، جرب تسجيل الدخول",
-    "email_not_confirmed": "يرجى تأكيد البريد الإلكتروني أولاً لتتمكن من الدخول"
+    "email_not_confirmed": "يرجى تأكيد البريد الإلكتروني أولاً لتتمكن من الدخول",
+    "invalid_url_error" : "رابط الفيديو غير صالح",
+    "no_live_stream_now" : "لا يوجد بث مباشر حالياً"
   },
   "success": {
     "login_done": "تم تسجيل الدخول بنجاح",

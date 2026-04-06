@@ -41,6 +41,7 @@ import 'features/explore/domain/usecases/get_popular_tags_use_case.dart';
 import 'features/home/data/repository/home_repository_impl.dart';
 import 'features/home/domain/repository/home_repository.dart';
 import 'features/home/domain/usecases/get_latest_posts_use_case.dart';
+import 'features/home/domain/usecases/get_live_stream_url_use_case.dart';
 import 'features/notifications/application/notification_service.dart';
 
 final sl = GetIt.instance;
@@ -82,6 +83,7 @@ void _initHomeFeature() {
   sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(sl()));
 
   // 3. Use Cases
+  sl.registerLazySingleton(() => GetLiveStreamUrlUseCase(sl()));
   sl.registerLazySingleton(() => GetNewsBarUseCase(sl()));
   sl.registerLazySingleton(() => GetBreakingPostsUseCase(sl()));
   sl.registerLazySingleton(() => GetFeaturedPostsUseCase(sl()));

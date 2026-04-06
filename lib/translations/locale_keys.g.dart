@@ -55,6 +55,10 @@ abstract class  LocaleKeys {
   static const news_save_in_collection = 'news.save_in_collection';
   static const news_views_count = 'news.views_count';
   static const news_news_count = 'news.news_count';
+  static const news_delete_post = 'news.delete_post';
+  static const news_delete_post_confirm = 'news.delete_post_confirm';
+  static const news_delete_category = 'news.delete_category';
+  static const news_delete_category_confirm = 'news.delete_category_confirm';
   static const news = 'news';
   static const search_placeholder = 'search.placeholder';
   static const search_title = 'search.title';
@@ -105,6 +109,8 @@ abstract class  LocaleKeys {
   static const errors_invalid_credentials = 'errors.invalid_credentials';
   static const errors_user_exists = 'errors.user_exists';
   static const errors_email_not_confirmed = 'errors.email_not_confirmed';
+  static const errors_invalid_url_error = 'errors.invalid_url_error';
+  static const errors_no_live_stream_now = 'errors.no_live_stream_now';
   static const errors = 'errors';
   static const success_login_done = 'success.login_done';
   static const success_data_saved = 'success.data_saved';

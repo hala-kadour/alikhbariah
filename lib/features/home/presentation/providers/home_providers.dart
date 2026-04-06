@@ -1,4 +1,5 @@
 import 'package:alikhbariah/features/home/domain/usecases/get_featured_posts_use_case.dart';
+import 'package:alikhbariah/features/home/domain/usecases/get_live_stream_url_use_case.dart';
 import 'package:alikhbariah/features/home/domain/usecases/get_most_readed_posts_use_case.dart';
 import 'package:alikhbariah/features/home/domain/usecases/get_news_bar_use_case.dart';
 import 'package:alikhbariah/features/home/domain/usecases/get_post_tags_use_case.dart';
@@ -12,6 +13,7 @@ import '../../data/models/video/video_model.dart';
 import '../../domain/usecases/get_breaking_posts_use_case.dart';
 import '../../domain/usecases/get_latest_posts_use_case.dart';
 
+final getLiveStreamUrlUC = Provider((ref) => sl<GetLiveStreamUrlUseCase>());
 final getNewsBarUC = Provider((ref) => sl<GetNewsBarUseCase>());
 final getBreakingPostsUC = Provider((ref) => sl<GetBreakingPostsUseCase>());
 final getFeaturedPostsUC = Provider((ref) => sl<GetFeaturedPostsUseCase>());
@@ -46,6 +48,13 @@ final mostReadedPostsCategoryFilterProvider = StateProvider<String?>(
 final videoSearchProvider = StateProvider<String?>((ref) => null);
 
 // ================================================================= //
+
+final liveStreamProvider = FutureProvider((ref) async {
+  final useCase = ref.watch(getLiveStreamUrlUC);
+  final result = await useCase.call();
+
+  return result.fold((failure) => throw failure.message, (url) => url);
+});
 
 final newsBarProvider = StreamProvider((ref) {
   final useCase = ref.watch(getNewsBarUC);

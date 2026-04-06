@@ -24,8 +24,10 @@ class NotificationPage extends StatelessWidget {
             return notificationList.when(
               data: (data) {
                 if (data.isEmpty) {
-                  return EmptyStatusAnimation(
-                    title: LocaleKeys.empty_no_notifications.tr(),
+                  return Center(
+                    child: EmptyStatusAnimation(
+                      title: LocaleKeys.empty_no_notifications.tr(),
+                    ),
                   );
                 }
 

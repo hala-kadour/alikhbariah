@@ -1,40 +1,58 @@
-import 'dart:developer';
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:alikhbariah/config/router/app_route_config.dart';
 import 'package:alikhbariah/config/theme/app_colors.dart';
+import 'package:alikhbariah/core/helper/helper.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class LiveStreamButton extends StatelessWidget {
+import '../../../../../core/widgets/snack-bar/custom_snack_bar.dart';
+import '../../providers/home_providers.dart';
+
+class LiveStreamButton extends ConsumerWidget {
   const LiveStreamButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsetsGeometry.directional(bottom: 4.0),
+      padding: const EdgeInsetsDirectional.only(bottom: 4.0),
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.red600,
-          side: .none,
+          side: BorderSide.none,
         ),
-        onPressed: () {
-          const String rawUrl = "https://www.youtube.com/watch?v=EujQMck-I6g";
+        onPressed: () async {
+          final liveStreamAsync = await ref.read(liveStreamProvider.future);
 
-          final videoId = YoutubePlayer.convertUrlToId(rawUrl);
-          log(videoId ?? " No ID !!");
-
-          if (videoId != null) {
-            context.pushNamed(AppRouteConfig.videoPlayer, extra: videoId);
+          try {
+            if (liveStreamAsync != null) {
+              final videoId = Helper.extractYoutubeId(liveStreamAsync);
+              if (videoId != null) {
+                context.pushNamed(AppRouteConfig.videoPlayer, extra: videoId);
+              } else {
+                CustomSnackBar.showError(
+                  context,
+                  LocaleKeys.errors_invalid_url_error,
+                );
+              }
+            } else {
+              CustomSnackBar.showError(
+                context,
+                LocaleKeys.errors_no_live_stream_now,
+              );
+            }
+          } catch (e) {
+            CustomSnackBar.showError(context, e.toString());
           }
         },
         label: Text(
           LocaleKeys.news_live_stream.tr(),
           style: Theme.of(context).textTheme.labelSmall!.copyWith(
             color: Theme.of(context).colorScheme.onPrimary,
-            fontWeight: .w700,
+            fontWeight: FontWeight.w700,
           ),
         ),
         icon: Icon(

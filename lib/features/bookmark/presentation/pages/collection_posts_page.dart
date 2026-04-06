@@ -1,5 +1,6 @@
 import 'package:alikhbariah/config/constant/assets_path.dart';
 import 'package:alikhbariah/config/theme/app_colors.dart';
+import 'package:alikhbariah/core/widgets/dialog/global/confirm_deletion_dialog.dart';
 import 'package:alikhbariah/core/widgets/layout/navbar/main_back_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:alikhbariah/translations/locale_keys.g.dart';
@@ -53,6 +54,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
                   if (!mounted) return;
 
                   showDialog(
+                    // ignore: use_build_context_synchronously
                     context: context,
                     builder: (context) =>
                         RenameCollectionDialog(collection: collection),
@@ -68,7 +70,17 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
               ),
             ),
             PopupMenuItem(
-              onTap: () => _removeCollection(collection.id),
+              onTap: () async {
+                await confirmDeletionDialog(
+                  context,
+                  LocaleKeys.news_delete_category.tr(),
+                  LocaleKeys.news_delete_category_confirm.tr(),
+                  () {
+                    _removeCollection(collection.id);
+                    context.pop();
+                  },
+                );
+              },
               child: Row(
                 spacing: 8.0,
                 children: [
@@ -106,8 +118,16 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
                       final post = filteredPosts[index];
                       return SavedPostTile(
                         post: post,
-                        onDelete: () =>
-                            _removePost(post.remoteId, collection.id),
+                        onDelete: () async {
+                          await confirmDeletionDialog(
+                            context,
+                            LocaleKeys.news_delete_post.tr(),
+                            LocaleKeys.news_delete_post_confirm.tr(),
+                            () {
+                              _removePost(post.remoteId, collection.id);
+                            },
+                          );
+                        },
                       );
                     },
                   ),
@@ -137,6 +157,7 @@ class _CollectionPostsPageState extends ConsumerState<CollectionPostsPage> {
     ref
         .read(bookmarkNotifierProvider.notifier)
         .removePost(remoteId: remoteId, collectionId: collectionId);
+    context.pop();
   }
 
   void _removeCollection(int collectionId) {

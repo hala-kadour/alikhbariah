@@ -8,6 +8,7 @@ import '../../data/models/video/video_category_model.dart';
 import '../../data/models/video/video_model.dart';
 
 abstract class HomeRepository {
+  Future<Either<Failure, String?>> getLiveStreamUrl();
   Stream<Either<Failure, List<BreakingNewsModel>>> getNewsBar();
   Stream<Either<Failure, List<PostModel>>> getBreakingPosts({
     String? categoryId,

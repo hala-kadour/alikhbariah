@@ -9,6 +9,7 @@ import '../models/video/video_category_model.dart';
 import '../models/video/video_model.dart';
 
 abstract class HomeSupabaseDataSource {
+  Future<String?> getLiveStreamUrl();
   Stream<List<BreakingNewsModel>> getNewsBar();
   Stream<List<PostModel>> getBreakingPosts({String? categoryId});
   Stream<List<PostModel>> getFeaturedPosts({String? categoryId});
@@ -40,6 +41,21 @@ class HomeSupabaseDataSourceImpl implements HomeSupabaseDataSource {
   // ==============================
   // Breaking News
   // ==============================
+  @override
+  Future<String?> getLiveStreamUrl() async {
+    final response = await _client
+        .from(_videos)
+        .select('youtube_video_id')
+        .eq('category_name', 'البث المباشر')
+        .order('created_at', ascending: false)
+        .limit(1)
+        .maybeSingle();
+
+    if (response != null) {
+      return response['youtube_video_id'] as String;
+    }
+    return null;
+  }
 
   @override
   Stream<List<BreakingNewsModel>> getNewsBar() {

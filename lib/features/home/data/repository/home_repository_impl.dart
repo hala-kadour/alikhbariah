@@ -15,6 +15,11 @@ class HomeRepositoryImpl with ErrorHandlingManager implements HomeRepository {
   HomeRepositoryImpl(this._homeSupabaseDatasource);
 
   @override
+  Future<Either<Failure, String?>> getLiveStreamUrl() {
+    return safeCall(_homeSupabaseDatasource.getLiveStreamUrl);
+  }
+
+  @override
   Stream<Either<Failure, List<BreakingNewsModel>>> getNewsBar() {
     return safeStream(_homeSupabaseDatasource.getNewsBar());
   }
