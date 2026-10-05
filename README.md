@@ -445,7 +445,7 @@ for insert with check (public.is_admin());
 
 | Videos | Video Player | Bookmark |
 |:---:|:---:|:---:|
-| ![Videos](docs/screenshots/videos.png) | ![Video player](docs/screenshots/video_player.png) | ![Bookmark](docs/screenshots/bookmark.png) |
+| ![Videos](docs/screenshots/video.png) | ![Video player](docs/screenshots/video_player.png) | ![Bookmark](docs/screenshots/bookmark.png) |
 
 | Explore | Search | Settings |
 |:---:|:---:|:---:|
