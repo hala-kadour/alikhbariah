@@ -113,21 +113,6 @@ The application is a **client-only** repository. All content, authentication, st
 
 The codebase follows a **feature‑first Clean Architecture** (`Data → Domain ← Presentation`) with a shared `core` layer.
 
-```
-┌──────────────────────────────────────────────────────────┐
-│  Presentation        pages · widgets · providers (Riverpod) │
-├──────────────────────────────────────────────────────────┤
-│  Domain              entities · repository contracts · usecases│
-├──────────────────────────────────────────────────────────┤
-│  Data                models (Freezed/JSON) · datasources · repository impls│
-└──────────────────────────────────────────────────────────┘
-              ▲ depends on abstractions only
-              │
-        lib/core/  →  errors (Failure) · usecases (UseCase<T,P>) ·
-                      services (ObjectBox, Storage, Navigation) ·
-                      widgets (design system) · providers (app‑wide)
-```
-
 **Key patterns in use**
 
 - **Clean Architecture per feature** — every feature folder under `lib/features/` is split into `data/`, `domain/`, and `presentation/`, so remote (Supabase) and local (ObjectBox) sources are interchangeable.
@@ -454,13 +439,17 @@ for insert with check (public.is_admin());
 
 <!-- Replace the placeholders below with real captures. Store them in docs/screenshots/. -->
 
-| Home | Explore | Post Details |
+| Splash | Home | Post Details |
 |:---:|:---:|:---:|
-| ![Home](docs/screenshots/home.png) | ![Explore](docs/screenshots/explore.png) | ![Post details](docs/screenshots/post_details.png) |
+| ![Splash](docs/screenshots/splash.png) | ![Home](docs/screenshots/home.png) | ![Post details](docs/screenshots/post_details.png) |
 
-| Videos | Bookmark | Settings |
+| Videos | Video Player | Bookmark |
 |:---:|:---:|:---:|
-| ![Videos](docs/screenshots/videos.png) | ![Bookmark](docs/screenshots/bookmark.png) | ![Settings](docs/screenshots/settings.png) |
+| ![Videos](docs/screenshots/videos.png) | ![Video player](docs/screenshots/video_player.png) | ![Bookmark](docs/screenshots/bookmark.png) |
+
+| Explore | Search | Settings |
+|:---:|:---:|:---:|
+| ![Home](docs/screenshots/explore.png) | ![Search](docs/screenshots/search.png) | ![Settings](docs/screenshots/settings.png) |
 
 
 > **Capturing tips** — run on an emulator, use `ScaffoldMessenger`-free screens, and capture at 1080×1920 for consistent framing. Replace all paths above with your own assets.
